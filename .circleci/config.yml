@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/redux-async
+    working_directory: ~/avocado
     docker:
       - image: circleci/node:8
     steps:
@@ -18,3 +18,13 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+    steps:
+      - run:
+          command: |
+            mkdir -p ~/reports
+            eslint ./src/ --format junit --output-file ~/reports/eslint.xml
+          when: always
+      - store_test_results:
+          path: ~/reports
+      - store_artifacts:
+          path: ~/reports 
