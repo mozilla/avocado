@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/avocado
+    working_directory: ~/redux-async
     docker:
       - image: circleci/node:8
     steps:
