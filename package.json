@@ -4,14 +4,22 @@
     "verbose": true,
     "setupFilesAfterEnv": [
       "<rootDir>src/App.test.js"
-    ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": -10
+      }
+    }
   },
   "version": "1.0.0",
   "main": "index.js",
   "license": "MPL",
   "scripts": {
     "start": "parcel src/index.html",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src/*.js src/*.jsx",
     "lint-fix": "eslint --fix src/*.js src/*.jsx"
   },
