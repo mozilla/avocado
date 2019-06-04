@@ -1,9 +1,9 @@
-import React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react"
+import * as ReactDOM from "react-dom"
 import { Provider } from 'react-redux'
-import App from "./App";
+import App from "./App"
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import  experimentReducer from './reducer';
+import  experimentReducer from './reducer'
 
 const logger = store => next => action => {
   console.log('dispatching', action)
@@ -24,11 +24,11 @@ const crashReporter = store => next => action => {
 const store = createStore(
   experimentReducer, 
   applyMiddleware(logger, crashReporter)
-);
+)
 
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById("root")
-);
+)
