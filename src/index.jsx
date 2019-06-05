@@ -1,9 +1,11 @@
-import React from "react"
-import * as ReactDOM from "react-dom"
-import { Provider } from 'react-redux'
-import App from "./App"
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import  experimentReducer from './reducer'
+import React from "react";
+import * as ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
+import App from "./App";
+import { createStore, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux-immutable';
+import  experiments from './reducer';
+import thunk from "redux-thunk";
 
 const logger = store => next => action => {
   console.log('dispatching', action)
@@ -22,8 +24,8 @@ const crashReporter = store => next => action => {
 }
 
 const store = createStore(
-  experimentReducer, 
-  applyMiddleware(logger, crashReporter)
+  experiments,
+  applyMiddleware(logger, crashReporter, thunk)
 )
 
 ReactDOM.render(
@@ -32,3 +34,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 )
+ 

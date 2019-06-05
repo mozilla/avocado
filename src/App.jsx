@@ -1,19 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchExperiments } from "./actions";
+import { getExperimentsCount }  from "./selectors";
 
 class ExperimentList extends React.Component {
-  constructor(props){
-    super(props);
+  componentDidMount() {
+    this.props.fetchExperiments();
   }
 
   render(){
-    console.log('calling fetch experiments in render')
-    let data = this.props.fetchExperiments();
     return (
         <div>
           <h1>
-            Hello
+            {this.props.experimentCount} experiments
           </h1>
         </div>
     )
@@ -21,6 +20,7 @@ class ExperimentList extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  experimentCount: getExperimentsCount(state)
 })
 
 const mapDispatchToProps = dispatch => ({
