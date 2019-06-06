@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchExperiments } from "./actions";
 import { getExperimentsCount }  from "./selectors";
 
-class ExperimentList extends React.Component {
+export class ExperimentList extends React.Component {
   componentDidMount() {
     this.props.fetchExperiments();
   }
