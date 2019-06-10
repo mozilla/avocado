@@ -1,10 +1,21 @@
-import * as actions from './actions';
+import { fetchExperiments } from "./actions";
 
-describe('ACTIONS', () => {
-  it('fetch experiments', () => {
-     const expectedAction = {
-        type: 'EXPERIMENT_DATA_RECEIVED'
-      }
-     expect(actions.fetchExperiments()).toEqual(expectedAction)
+describe('testing actions', () => {
+  beforeEach(() => {
+    fetch.resetMocks()
+  })
+
+  it('calls API and returns data to me', done => {
+    fetch.mockResponseOnce(JSON.stringify('12345'))
+ 
+    //assert on the response
+    let dispatchHandler = fetchExperiments()
+    let fakeDispatch = action => {
+      expect(action.data).toEqual('12345');
+      expect(action.type).toEqual('EXPERIMENT_DATA_RECEIVED');
+      done();
+    }
+
+    dispatchHandler(fakeDispatch);
   })
 })

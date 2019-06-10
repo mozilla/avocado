@@ -10,4 +10,4 @@ const experiments = (state = new List(), action) => {
   }
 }
 
-export default combineReducers({ experiments });
+export default combineReducers({ items: experiments });

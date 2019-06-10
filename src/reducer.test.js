@@ -1,14 +1,10 @@
 import experiments  from "./reducer";
+import { fromJS, List } from 'immutable';
+import thunk from "redux-thunk";
 
-
-// describe('todos reducer', () => {
-//   it('should return the initial state', () => {
-//     expect(experiments()).toEqual([
-//       {
-//         text: 'Use Redux',
-//         completed: false,
-//         id: 0
-//       }
-//     ])
-//   })
-// })
+describe("Reducer", () => {
+  it("should test default action", () => { 
+    let expectedState = fromJS({"items": []});
+    expect(experiments(undefined, {})).toEqual(expectedState);
+  });
+});
