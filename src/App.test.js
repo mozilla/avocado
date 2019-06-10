@@ -1,9 +1,13 @@
 import React from "react";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { shallow, configure } from "enzyme";
+import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
-import { ExperimentList } from "./App";
+import ConnectedExperimentList, { ExperimentList } from "./App";
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { List, Map } from 'immutable';
+import thunk from "redux-thunk";
 
 
 // create fake store and action
@@ -21,4 +25,23 @@ describe("Experiment list component", () => {
     const wrapper = shallow(<ExperimentList experimentCount={113} fetchExperiments={()=>{ fetchExperimentsCalled = true; }}/>);
     expect(fetchExperimentsCalled).toBeTruthy();
   });
+
+  it("should mount", () => { 
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(
+      Map({ 
+        experiments: Map({ 
+          items: List([]) 
+        })
+      })
+    );
+    const connectedComponent = mount(
+      <Provider store={store}>
+        <ConnectedExperimentList />
+      </Provider>
+    )
+
+  });
+
+
 });

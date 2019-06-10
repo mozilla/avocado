@@ -19,12 +19,10 @@ export class ExperimentList extends React.Component {
   }
 }
 
-/* istanbul ignore next */
 const mapStateToProps = state => ({
   experimentCount: getExperimentsCount(state)
 })
 
-/* istanbul ignore next */
 const mapDispatchToProps = dispatch => ({
   fetchExperiments: () => dispatch(fetchExperiments())
 })
