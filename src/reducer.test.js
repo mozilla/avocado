@@ -13,4 +13,4 @@ describe("Reducer", () => {
     let reducerResult = experiments(undefined, { type: "EXPERIMENT_DATA_RECEIVED", data: "[1,2,3]" })
     expect(reducerResult).toEqual(expectedState);
   });
-});
+}); 

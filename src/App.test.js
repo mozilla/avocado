@@ -22,7 +22,3 @@ describe("Experiment list component", () => {
     expect(fetchExperimentsCalled).toBeTruthy();
   });
 });
-
-
-let x = 1;
-let addOne = (arg) => arg + 1;

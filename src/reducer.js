@@ -1,7 +1,7 @@
 import { fromJS, List } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 
-const experiments = (state = new List(), action) => {
+const experiments = (state = List(), action) => {
   switch(action.type) {
     case "EXPERIMENT_DATA_RECEIVED":
       return fromJS(action.data);
