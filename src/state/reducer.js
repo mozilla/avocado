@@ -1,6 +1,6 @@
 import { fromJS, List } from "immutable";
 import { combineReducers } from "redux-immutable";
-import { EXPERIMENT_DATA_RECEIVED } from './types';
+import { EXPERIMENT_DATA_RECEIVED } from "./types";
 
 const experiments = (state = List(), action) => {
   switch (action.type) {

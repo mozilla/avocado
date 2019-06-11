@@ -1,5 +1,5 @@
 import { fetchExperiments } from "../state/actions";
-import { EXPERIMENT_DATA_RECEIVED } from '../state/types';
+import { EXPERIMENT_DATA_RECEIVED } from "../state/types";
 
 describe("testing actions", () => {
   beforeEach(() => {

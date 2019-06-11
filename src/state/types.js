@@ -1,1 +1,1 @@
-export const EXPERIMENT_DATA_RECEIVED = 'experiment_data_received';
+export const EXPERIMENT_DATA_RECEIVED = "experiment_data_received";
