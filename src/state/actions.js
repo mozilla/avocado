@@ -8,6 +8,5 @@ export const fetchExperiments = () => dispatch => {
         type: EXPERIMENT_DATA_RECEIVED,
         data: data
       });
-    })
-    .catch(Error);
+    });
 };
