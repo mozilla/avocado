@@ -9,5 +9,5 @@ export const fetchExperiments = () => dispatch => {
         data: data
       });
     })
-    .catch(console.log);
+    .catch(Error);
 };
