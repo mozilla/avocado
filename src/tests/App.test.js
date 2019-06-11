@@ -2,7 +2,7 @@ import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
-import ConnectedExperimentList, { ExperimentList } from "./App";
+import ConnectedExperimentList, { ExperimentList } from "../components/App";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { List, Map } from "immutable";

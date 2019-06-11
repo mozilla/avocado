@@ -1,5 +1,6 @@
-import experiments from "./reducer";
+import experiments from "../state/reducer";
 import { fromJS } from "immutable";
+import { EXPERIMENT_DATA_RECEIVED } from '../state/types';
 
 describe("Reducer", () => {
   it("should test default action", () => {
@@ -10,7 +11,7 @@ describe("Reducer", () => {
   it("should test EXPERIMENT_DATA_RECEIVED case", () => {
     let expectedState = fromJS({ items: "[1,2,3]" });
     let reducerResult = experiments(undefined, {
-      type: "EXPERIMENT_DATA_RECEIVED",
+      type: EXPERIMENT_DATA_RECEIVED,
       data: "[1,2,3]"
     });
     expect(reducerResult).toEqual(expectedState);

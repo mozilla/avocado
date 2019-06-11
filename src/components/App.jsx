@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchExperiments } from "./actions";
-import { getExperimentsCount } from "./selectors";
+import { fetchExperiments } from "../state/actions";
+import { getExperimentsCount } from "../state/selectors";
 import PropTypes from "prop-types";
 
 export class ExperimentList extends React.Component {

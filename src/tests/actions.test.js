@@ -1,4 +1,5 @@
-import { fetchExperiments } from "./actions";
+import { fetchExperiments } from "../state/actions";
+import { EXPERIMENT_DATA_RECEIVED } from '../state/types';
 
 describe("testing actions", () => {
   beforeEach(() => {
@@ -12,7 +13,7 @@ describe("testing actions", () => {
     let dispatchHandler = fetchExperiments();
     let fakeDispatch = action => {
       expect(action.data).toEqual("12345");
-      expect(action.type).toEqual("EXPERIMENT_DATA_RECEIVED");
+      expect(action.type).toEqual(EXPERIMENT_DATA_RECEIVED);
       done();
     };
 

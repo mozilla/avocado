@@ -1,5 +1,5 @@
 import { List, Map } from "immutable";
-import { getExperimentsCount } from "./selectors";
+import { getExperimentsCount } from "../state/selectors";
 
 describe("Selectors", () => {
   it("should get experiment count", () => {
