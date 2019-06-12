@@ -1,7 +1,7 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import App from "./components/App";
+import ExperimentList from "./components/ExperimentList";
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
 import experiments from "./state/reducer";
@@ -27,7 +27,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ExperimentList />
   </Provider>,
   document.getElementById("root")
 );

@@ -7,7 +7,7 @@
     ],
     "verbose": true,
     "setupFilesAfterEnv": [
-      "<rootDir>src/tests/App.test.js"
+      "<rootDir>src/tests/ExperimentList.test.js"
     ],
     "coverageThreshold": {
       "global": {
