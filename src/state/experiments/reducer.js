@@ -2,7 +2,7 @@ import { fromJS, List } from "immutable";
 import { combineReducers } from "redux-immutable";
 import { EXPERIMENT_DATA_RECEIVED } from "../action-types";
 
-const experiments = (state = List(), action) => {
+const items = (state = List(), action) => {
   switch (action.type) {
     case EXPERIMENT_DATA_RECEIVED:
       return fromJS(action.data);
@@ -11,4 +11,4 @@ const experiments = (state = List(), action) => {
   }
 };
 
-export default combineReducers({ items: experiments });
+export default combineReducers({ items: items });
