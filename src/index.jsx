@@ -1,10 +1,10 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import ExperimentList from "./components/ExperimentList";
+import ExperimentList from "./components/experiments/ExperimentList";
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
-import experiments from "./state/reducer";
+import experiments from "./state/experiments/reducer";
 import thunk from "redux-thunk";
 
 const logger = () => next => action => {

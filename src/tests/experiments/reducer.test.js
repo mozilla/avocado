@@ -1,6 +1,6 @@
-import experiments from "../state/reducer";
+import experiments from "../../state/experiments/reducer";
 import { fromJS } from "immutable";
-import { EXPERIMENT_DATA_RECEIVED } from "../state/types";
+import { EXPERIMENT_DATA_RECEIVED } from "../../state/action-types";
 
 describe("Reducer", () => {
   it("should test default action", () => {

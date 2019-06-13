@@ -4,7 +4,7 @@ import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 import ConnectedExperimentList, {
   ExperimentList
-} from "../components/ExperimentList";
+} from "../../components/experiments/ExperimentList";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { List, Map } from "immutable";
