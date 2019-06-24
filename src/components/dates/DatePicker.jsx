@@ -12,23 +12,24 @@ export class DatePicker extends React.Component {
       <div>
         <label>Start date:</label>
 
-        <input type="date" id="start" name="start-date"
+        <input type="date" 
         value="2018-07-22" onChange={ (e) => this.props.setStartDate(e.target.value)} 
         value={this.props.value} >
         </input>
 
-        <h5>Selected Start Date: {this.props.selectedVal}</h5>
+        <h5>Selected Start Date: {this.props.selectedDate}</h5>
       </div>
     );
   }
 }
 
 DatePicker.propTypes = {
+
 };
 
 const mapStateToProps = (state) => ({
   value: state.value,
-  selectedVal: getStartDate(state)
+  selectedDate: getStartDate(state)
 })
 
 const mapDispatchToProps = dispatch => {
