@@ -10,7 +10,9 @@ import date from "./state/dates/reducer";
 import thunk from "redux-thunk";
 
 const logger = () => next => action => {
+  console.log("dispatching", action);
   let result = next(action);
+  console.log("next state", store.getState());
   return result;
 };
 

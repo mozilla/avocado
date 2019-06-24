@@ -4,16 +4,13 @@ import { getStartDate } from "../../state/dates/selectors";
 import { setStartDate } from "../../state/dates/actions";
 
 export class DatePicker extends React.Component {
-  componentDidMount() {
-  }
-
   render() {
     return (
       <div>
         <label>Start date:</label>
 
         <input type="date" 
-        value="2018-07-22" onChange={ (e) => this.props.setStartDate(e.target.value)} 
+        onChange={ (e) => this.props.setStartDate(e.target.value)} 
         value={this.props.value} >
         </input>
 
@@ -24,7 +21,7 @@ export class DatePicker extends React.Component {
 }
 
 DatePicker.propTypes = {
-
+  
 };
 
 const mapStateToProps = (state) => ({

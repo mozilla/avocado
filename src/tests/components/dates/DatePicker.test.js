@@ -7,7 +7,7 @@ import ConnectedDatePicker, {
 } from "../../../components/dates/DatePicker";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { List, Map } from "immutable";
+import { List, Map, string } from "immutable";
 import thunk from "redux-thunk";
 
 describe("DatePicker component", () => {
@@ -15,15 +15,31 @@ describe("DatePicker component", () => {
     const wrapper = shallow(
       <DatePicker />
     );
-    const text = wrapper.find("h5").text();
-    expect(text).contains("113 experiments");
+    expect(wrapper.exists()).toBe(true);
   });
 
-  it("should ", () => {
-
+  it("should call setStartDate with value when selecting new date", () => {
+    let startDateReceived = null;
+    const component = mount(<DatePicker setStartDate = {(selectedStartDate) => { startDateReceived = selectedStartDate }} />);
+    const input = component.find('input').at(0);
+    input.instance().value = "2019-08-01";
+    input.simulate('change');
+    expect(startDateReceived).toEqual("2019-08-01");
   });
 
-  it("should ", () => {
-
+  it("should mount", () => {
+    const mockStore = configureStore([thunk]);
+    const store = mockStore(
+      Map({
+        date: Map({
+          dates: ""
+        })
+      })
+    );
+    mount(
+      <Provider store={store}>
+        <ConnectedDatePicker />
+      </Provider>
+    );
   });
 });
