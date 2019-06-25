@@ -32,14 +32,17 @@ describe("DatePicker component", () => {
     const store = mockStore(
       Map({
         date: Map({
-          dates: ""
+          dates: String("")
         })
       })
     );
-    mount(
+    const component = mount(
       <Provider store={store}>
         <ConnectedDatePicker />
       </Provider>
     );
+    const input = component.find('input').at(0);
+    input.instance().value = "2019-08-01";
+    input.simulate('change');
   });
 });
