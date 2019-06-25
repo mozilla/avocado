@@ -21,7 +21,8 @@ export class DatePicker extends React.Component {
 }
 
 DatePicker.propTypes = {
-  
+  value: PropTypes.string,
+  selectedDate: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
