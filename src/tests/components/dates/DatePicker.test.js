@@ -7,7 +7,7 @@ import ConnectedDatePicker, {
 } from "../../../components/dates/DatePicker";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { List, Map, string } from "immutable";
+import { Map } from "immutable";
 import thunk from "redux-thunk";
 
 describe("DatePicker component", () => {

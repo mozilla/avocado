@@ -25,7 +25,7 @@ const crashReporter = () => next => action => {
 };
 
 const store = createStore(
-  combineReducers({ experiments, date}),
+  combineReducers({ experiments, date }),
   applyMiddleware(logger, crashReporter, thunk)
 );
 
