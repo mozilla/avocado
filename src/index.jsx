@@ -27,7 +27,11 @@ const crashReporter = () => next => action => {
 };
 
 const store = createStore(
+<<<<<<< HEAD
   combineReducers({ experiments, dates }),
+=======
+  combineReducers({ experiments, date }),
+>>>>>>> ran linting
   applyMiddleware(logger, crashReporter, thunk)
 );
 
