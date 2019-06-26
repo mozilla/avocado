@@ -8,15 +8,13 @@ export class DatePicker extends React.Component {
   render() {
     return (
       <div>
-        <label>Start date:</label>
-
         <input
           type="date"
           onChange={e => this.props.setStartDate(e.target.value)}
           value={this.props.value}
         />
 
-        <h5>Selected Start Date: {this.props.selectedDate}</h5>
+        <h5>Selected Date: {this.props.selectedDate}</h5>
       </div>
     );
   }
@@ -24,7 +22,7 @@ export class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   value: PropTypes.string,
-  selectedDate: PropTypes.func,
+  selectedDate: PropTypes.string,
   setStartDate: PropTypes.func
 };
 

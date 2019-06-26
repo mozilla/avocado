@@ -32,6 +32,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ExperimentList />
+    <h4>Start Date: </h4>
+    <DatePicker />
+    <h4>End Date:</h4>
     <DatePicker />
   </Provider>,
   document.getElementById("root")
