@@ -1,20 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getStartDate } from "../../state/dates/selectors";
-import { setStartDate } from "../../state/dates/actions";
+import { setDate } from "../../state/dates/actions";
+
+
 import PropTypes from "prop-types";
 
 export class DatePicker extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    this.props.dispatch(setDate(event.target.value, this.props.onChangeAction))
+  };
+
   render() {
     return (
       <div>
         <input
           type="date"
-          onChange={e => this.props.setStartDate(e.target.value)}
+          onChange={this.onChange}
           value={this.props.value}
         />
-
-        <h5>Selected Date: {this.props.selectedDate}</h5>
       </div>
     );
   }
@@ -22,24 +34,13 @@ export class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   value: PropTypes.string,
-  selectedDate: PropTypes.string,
   setStartDate: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  value: state.value,
-  selectedDate: getStartDate(state)
+  value: state.value
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setStartDate: date => {
-      dispatch(setStartDate(date));
-    }
-  };
-};
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(DatePicker);
