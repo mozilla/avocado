@@ -9,6 +9,7 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { Map } from "immutable";
 import thunk from "redux-thunk";
+import { START_DATE_SELECTED } from "../../../state/action-types";
 
 describe("DatePicker component", () => {
   it("should render the datepicker component", () => {
@@ -44,5 +45,12 @@ describe("DatePicker component", () => {
     const input = component.find('input').at(0);
     input.instance().value = "2019-08-01";
     input.simulate('change');
+
+    const expectedAction = {
+      type: START_DATE_SELECTED,
+      data: "2019-08-01"
+    }
+    
+    expect(store.getActions()).toEqual([expectedAction]);
   });
 });

@@ -10,9 +10,11 @@ import date from "./state/dates/reducer";
 import thunk from "redux-thunk";
 
 const logger = () => next => action => {
+  /* eslint-disable no-console */
   console.log("dispatching", action);
   let result = next(action);
   console.log("next state", store.getState());
+  /* eslint-enable no-console */
   return result;
 };
 
@@ -33,8 +35,6 @@ ReactDOM.render(
   <Provider store={store}>
     <ExperimentList />
     <h4>Start Date: </h4>
-    <DatePicker />
-    <h4>End Date:</h4>
     <DatePicker />
   </Provider>,
   document.getElementById("root")
