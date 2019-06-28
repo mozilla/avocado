@@ -4,8 +4,8 @@ import { getStartDate } from "../../../state/dates/selectors";
 describe("Date selectors", () => {
   it("should get start date", () => {
     let mockedState = Map({
-        date: Map({
-          dates: "2018-07-22"
+        dates: Map({
+          startDate: "2018-07-22"
         })
       });
     

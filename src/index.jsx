@@ -6,7 +6,7 @@ import DatePicker from "./components/dates/DatePicker";
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
-import date from "./state/dates/reducer";
+import dates from "./state/dates/reducer";
 import thunk from "redux-thunk";
 
 const logger = () => next => action => {
@@ -27,7 +27,7 @@ const crashReporter = () => next => action => {
 };
 
 const store = createStore(
-  combineReducers({ experiments, date }),
+  combineReducers({ experiments, dates }),
   applyMiddleware(logger, crashReporter, thunk)
 );
 

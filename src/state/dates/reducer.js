@@ -10,4 +10,4 @@ const date = (state = "None selected", action) => {
   }
 };
 
-export default combineReducers({ dates: date });
+export default combineReducers({ startDate: date });

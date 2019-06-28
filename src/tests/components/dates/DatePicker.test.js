@@ -32,8 +32,8 @@ describe("DatePicker component", () => {
     const mockStore = configureStore([thunk]);
     const store = mockStore(
       Map({
-        date: Map({
-          dates: String("")
+        dates: Map({
+          startDate: String("")
         })
       })
     );
