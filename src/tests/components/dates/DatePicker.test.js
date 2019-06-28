@@ -28,7 +28,7 @@ describe("DatePicker component", () => {
     expect(startDateReceived).toEqual("2019-08-01");
   });
 
-  it("should mount", () => {
+  it("should mount and check that correct action for setting start date was dispatched", () => {
     const mockStore = configureStore([thunk]);
     const store = mockStore(
       Map({

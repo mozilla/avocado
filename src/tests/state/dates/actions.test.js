@@ -2,10 +2,6 @@ import { setStartDate } from "../../../state/dates/actions";
 import { START_DATE_SELECTED } from "../../../state/action-types";
 
 describe("testing actions", () => {
-  beforeEach(() => {
-    fetch.resetMocks();
-  });
-
   it("should set the start date", done => {
     let setDate = setStartDate("2019-06-19");
 
