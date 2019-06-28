@@ -10,8 +10,6 @@ export class DatePicker extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: ''};
-
     this.onChange = this.onChange.bind(this);
   }
 
@@ -34,7 +32,7 @@ export class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   value: PropTypes.string,
-  setStartDate: PropTypes.func
+  setDate: PropTypes.func
 };
 
 const mapStateToProps = state => ({
