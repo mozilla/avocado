@@ -20,11 +20,18 @@ describe("DatePicker component", () => {
   });
 
   it("should call setStartDate with value when selecting new date", () => {
+    const dispatch = jest.fn();
+
+    const props = {
+      dispatch
+    }
     let startDateReceived = null;
-    const component = mount(<DatePicker setStartDate = {(selectedStartDate) => { startDateReceived = selectedStartDate }} />);
+    const component = mount(<DatePicker {...props}
+      setDate = { (selectedStartDate, START_DATE_SELECTED) => { startDateReceived = selectedStartDate }} />);
     const input = component.find('input').at(0);
     input.instance().value = "2019-08-01";
     input.simulate('change');
+    expect(dispatch).toHaveBeenCalledWith(update(data))
     expect(startDateReceived).toEqual("2019-08-01");
   });
 
