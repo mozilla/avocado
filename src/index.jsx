@@ -8,7 +8,6 @@ import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
 import dates from "./state/dates/reducer";
 import thunk from "redux-thunk";
-import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
 
 const logger = () => next => action => {
   /* eslint-disable no-console */
@@ -28,25 +27,15 @@ const crashReporter = () => next => action => {
 };
 
 const store = createStore(
-<<<<<<< HEAD
   combineReducers({ experiments, dates }),
-=======
-  combineReducers({ experiments, date }),
->>>>>>> ran linting
   applyMiddleware(logger, crashReporter, thunk)
 );
 
-const App = props => (<React.Fragment>
-  <ExperimentList />
-    <h4>Start Date: </h4>
-    <DatePicker onChangeAction={START_DATE_SELECTED} />
-    <h4>End Date: </h4>
-    <DatePicker onChangeAction={END_DATE_SELECTED} />
-</React.Fragment>)
-
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ExperimentList />
+    <h4>Start Date: </h4>
+    <DatePicker />
   </Provider>,
   document.getElementById("root")
 );
