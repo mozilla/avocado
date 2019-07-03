@@ -19,23 +19,26 @@ describe("DatePicker component", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it("should call setStartDate with value when selecting new date", () => {
+  it("should call setStartDate with value when selecting new date", done => {
     const dispatch = jest.fn();
-
+    const setDate = (selectedStartDate, START_DATE_SELECTED) => { startDateReceived = selectedStartDate }
     const props = {
       dispatch
     }
+
     let startDateReceived = null;
-    const component = mount(<DatePicker {...props}
-      setDate = { (selectedStartDate, START_DATE_SELECTED) => { startDateReceived = selectedStartDate }} />);
-    const input = component.find('input').at(0);
-    input.instance().value = "2019-08-01";
-    input.simulate('change');
-    expect(dispatch).toHaveBeenCalledWith(update(data))
+    
+    const component = mount(<DatePicker {...props} onChangeAction={START_DATE_SELECTED} onChange={setDate} />),
+    dateInput = component.find("input[type='date']");
+
+    dateInput.simulate('change', {target: { value: "2018-01-04" }});
+    done();
+    console.log(startDateReceived);
     expect(startDateReceived).toEqual("2019-08-01");
+    expect(dispatch).toHaveBeenCalledWith(setDate)
   });
 
-  it("should mount", () => {
+  it("should mount and check that correct action for setting start date was dispatched", () => {
     const mockStore = configureStore([thunk]);
     const store = mockStore(
       Map({
@@ -44,14 +47,13 @@ describe("DatePicker component", () => {
         })
       })
     );
-    const component = mount(
+    let component = mount(
       <Provider store={store}>
-        <ConnectedDatePicker />
+        <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
       </Provider>
     );
     const input = component.find('input').at(0);
-    input.instance().value = "2019-08-01";
-    input.simulate('change');
+    input.simulate('change', { target: { value: '2019-08-01' } })
 
     const expectedAction = {
       type: START_DATE_SELECTED,
