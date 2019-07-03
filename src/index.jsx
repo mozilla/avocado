@@ -32,13 +32,15 @@ const store = createStore(
   applyMiddleware(logger, crashReporter, thunk)
 );
 
-const App = props => (<React.Fragment>
-  <ExperimentList />
+const App = () => (
+  <React.Fragment>
+    <ExperimentList />
     <h4>Start Date: </h4>
     <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
     <h4>End Date: </h4>
     <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
-</React.Fragment>)
+  </React.Fragment>
+);
 
 ReactDOM.render(
   <Provider store={store}>
