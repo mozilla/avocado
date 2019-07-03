@@ -2,7 +2,7 @@ import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ExperimentList from "./components/experiments/ExperimentList";
-import DatePicker from "./components/dates/DatePicker";
+import ConnectedDatePicker from "./components/dates/DatePicker";
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
@@ -35,9 +35,9 @@ const store = createStore(
 const App = props => (<React.Fragment>
   <ExperimentList />
     <h4>Start Date: </h4>
-    <DatePicker onChangeAction={START_DATE_SELECTED} />
+    <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
     <h4>End Date: </h4>
-    <DatePicker onChangeAction={END_DATE_SELECTED} />
+    <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
 </React.Fragment>)
 
 ReactDOM.render(
