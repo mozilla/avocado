@@ -19,23 +19,27 @@ describe("DatePicker component", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it("should call setStartDate with value when selecting new date", done => {
-    const dispatch = jest.fn();
-    const setDate = (selectedStartDate, START_DATE_SELECTED) => { startDateReceived = selectedStartDate }
+  it("should call setStartDate with value when selecting new date", () => {
+    const sampleDate = "2018-08-01";
+    let startDateReceived = null;
+
+    const dispatch = actionCreator => {
+      actionCreator((action) => {
+        startDateReceived = action.data;
+      })
+    }
+    
     const props = {
-      dispatch
+      dispatch,
+      onChangeAction: START_DATE_SELECTED
     }
 
-    let startDateReceived = null;
-    
-    const component = mount(<DatePicker {...props} onChangeAction={START_DATE_SELECTED} onChange={setDate} />),
-    dateInput = component.find("input[type='date']");
+    const component = mount(<DatePicker {...props} />)
 
-    dateInput.simulate('change', {target: { value: "2018-01-04" }});
-    done();
-    console.log(startDateReceived);
-    expect(startDateReceived).toEqual("2019-08-01");
-    expect(dispatch).toHaveBeenCalledWith(setDate)
+    const dateInput = component.find("input[type='date']");
+    dateInput.simulate('change', {target: { value: sampleDate }});
+
+    expect(startDateReceived).toEqual(sampleDate);
   });
 
   it("should mount and check that correct action for setting start date was dispatched", () => {
