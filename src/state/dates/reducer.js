@@ -1,6 +1,5 @@
 import { combineReducers } from "redux-immutable";
-import { START_DATE_SELECTED } from "../action-types";
-import { END_DATE_SELECTED } from "../action-types";
+import { START_DATE_SELECTED, END_DATE_SELECTED } from "../action-types";
 
 const date = (state = "None selected", action) => {
   switch (action.type) {

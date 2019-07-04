@@ -18,7 +18,7 @@ describe("Date Reducer", () => {
   });
   
   it("should test end date selected case", () => {
-    let expectedState = fromJS({"dates": "2018-07-21"});
+    let expectedState = fromJS({"startDate": "2018-07-21"});
     let reducerResult = date(undefined, {
       type: END_DATE_SELECTED,
       data: "2018-07-21"
