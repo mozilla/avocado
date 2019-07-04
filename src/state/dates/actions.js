@@ -1,8 +1,6 @@
-import { START_DATE_SELECTED } from "../action-types";
-
-export const setStartDate = (value) =>  dispatch => {
+export const setDate = (value, dateActionType) =>  dispatch => {
     dispatch({
-      type: START_DATE_SELECTED,
+      type: dateActionType,
       data: value
     })
 }

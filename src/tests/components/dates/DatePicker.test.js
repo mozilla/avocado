@@ -20,12 +20,26 @@ describe("DatePicker component", () => {
   });
 
   it("should call setStartDate with value when selecting new date", () => {
+    const sampleDate = "2018-08-01";
     let startDateReceived = null;
-    const component = mount(<DatePicker setStartDate = {(selectedStartDate) => { startDateReceived = selectedStartDate }} />);
-    const input = component.find('input').at(0);
-    input.instance().value = "2019-08-01";
-    input.simulate('change');
-    expect(startDateReceived).toEqual("2019-08-01");
+
+    const dispatch = actionCreator => {
+      actionCreator((action) => {
+        startDateReceived = action.data;
+      })
+    }
+    
+    const props = {
+      dispatch,
+      onChangeAction: START_DATE_SELECTED
+    }
+
+    const component = mount(<DatePicker {...props} />)
+
+    const dateInput = component.find("input[type='date']");
+    dateInput.simulate('change', {target: { value: sampleDate }});
+
+    expect(startDateReceived).toEqual(sampleDate);
   });
 
   it("should mount and check that correct action for setting start date was dispatched", () => {
@@ -37,14 +51,13 @@ describe("DatePicker component", () => {
         })
       })
     );
-    const component = mount(
+    let component = mount(
       <Provider store={store}>
-        <ConnectedDatePicker />
+        <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
       </Provider>
     );
     const input = component.find('input').at(0);
-    input.instance().value = "2019-08-01";
-    input.simulate('change');
+    input.simulate('change', { target: { value: '2019-08-01' } })
 
     const expectedAction = {
       type: START_DATE_SELECTED,
