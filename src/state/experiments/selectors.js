@@ -4,36 +4,34 @@ export const getExperimentsCount = state =>
 export const getFilteredExperimentsByDate = (state) => {
   let validExperiments = [];
   const experiments = state.get("experiments").get("items"); 
+  const selectedStartTimestamp = getStartDatepickerTimestamp(state);
 
-  if (state.getIn(["dates", "startDate"])) {
-    // these are the start and end dates 
-    const selectedStartDate = state.getIn(["dates", "startDate"]);
-    const selectedStartTimestamp = new Date(selectedStartDate).getTime();
+  for (let i = 0; i < experiments.size; i++) {
+    const experimentStartDate = experiments.getIn([i, "start_date"])
+    const experimentEndDate = experiments.getIn([i, "end_date"]);
 
-    // loop through experiments and compare dates
-    for (let i = 0; i < experiments.size; i++) {
-      // check if end date exist
-      const experimentStartDate = state.getIn(["experiments", "items", i, "start_date"])
-      const experimentEndDate = state.getIn(["experiments", "items", i, "end_date"]);
-
-
-      if (isEndDateSelected(state)) {  
-        const selectedEndDate = state.getIn(["dates", "endDate"]);
-        const selectedEndTimestamp = new Date(selectedEndDate).getTime();
-        if (experimentStartDate >= selectedStartTimestamp && experimentEndDate <= selectedEndTimestamp) {
-          validExperiments.push(state.getIn(["experiments", "items", i, "slug"]));
-        }
-      } else {
-        if (experimentStartDate >= selectedStartTimestamp) {
-          validExperiments.push(state.getIn(["experiments", "items", i, "slug"]));
-        }
+    if (isEndDateSelected(state)) {  
+      const selectedEndTimestamp = getEndDatepickerTimestamp(state);
+      if (experimentStartDate >= selectedStartTimestamp && experimentEndDate <= selectedEndTimestamp) {
+        validExperiments.push(experiments.getIn([i, "slug"]));
       }
-    }
+    } else {
+      if (experimentStartDate >= selectedStartTimestamp) {
+        validExperiments.push(experiments.getIn([i, "slug"]));
+      }
+    }  
   }
-
-  console.log("validExperiments: ", validExperiments);
-
   return validExperiments;
+}
+
+const getStartDatepickerTimestamp = (state) => {
+  const selectedStartDate = state.getIn(["dates", "startDate"]);
+  return new Date(selectedStartDate).getTime();
+}
+
+const getEndDatepickerTimestamp = (state) => {
+  const selectedEndDate = state.getIn(["dates", "endDate"]);
+  return new Date(selectedEndDate).getTime();
 }
 
 const isEndDateSelected = (state) => {
