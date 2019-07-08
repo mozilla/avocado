@@ -25,7 +25,7 @@ export class ExperimentList extends React.Component {
 ExperimentList.propTypes = {
   experimentCount: PropTypes.number,
   fetchExperiments: PropTypes.func,
-  filteredExperiments: PropTypes.func
+  filteredExperiments: PropTypes.array
 };
 const mapStateToProps = state => ({
   experimentCount: getExperimentsCount(state),
