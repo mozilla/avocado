@@ -13,11 +13,11 @@ export const getFilteredExperimentsByDate = (state) => {
     if (isEndDateSelected(state)) {  
       const selectedEndTimestamp = getEndDatepickerTimestamp(state);
       if (experimentStartDate >= selectedStartTimestamp && experimentEndDate <= selectedEndTimestamp) {
-        validExperiments.push(experiments.getIn([i, "slug"]));
+        validExperiments.push(experiments.getIn([i, "name"]));
       }
     } else {
       if (experimentStartDate >= selectedStartTimestamp) {
-        validExperiments.push(experiments.getIn([i, "slug"]));
+        validExperiments.push(experiments.getIn([i, "name"]));
       }
     }  
   }
