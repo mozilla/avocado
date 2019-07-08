@@ -5,6 +5,9 @@ import {
   getExperimentsCount,
   getFilteredExperimentsByDate
 } from "../../state/experiments/selectors";
+import {
+  getStartDate
+} from "../../state/dates/selectors";
 import PropTypes from "prop-types";
 
 export class ExperimentList extends React.Component {
@@ -12,10 +15,19 @@ export class ExperimentList extends React.Component {
     this.props.fetchExperiments();
   }
 
+  renderTitle() {
+    let title = "experiments "
+    if(this.props.startDate) {
+      title += `after  ${this.props.startDate}`;
+    }
+
+    return title;
+  }
+
   render() {
     return (
       <div>
-        <h1>{this.props.experimentCount} experiments</h1>
+        <h1>{this.props.filteredExperiments.length} / {this.props.experimentCount} { this.renderTitle() }</h1>
         <h6>Experiments: {this.props.filteredExperiments}</h6>
       </div>
     );
@@ -29,7 +41,8 @@ ExperimentList.propTypes = {
 };
 const mapStateToProps = state => ({
   experimentCount: getExperimentsCount(state),
-  filteredExperiments: getFilteredExperimentsByDate(state)
+  filteredExperiments: getFilteredExperimentsByDate(state),
+  startDate: getStartDate(state)
 });
 
 const mapDispatchToProps = dispatch => ({

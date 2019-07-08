@@ -68,7 +68,7 @@ describe("getFilteredExperimentsByDate tests", () => {
       }), 
       dates: Map({
         startDate: "2018-07-22",
-        endDate: "None selected"
+        endDate: ""
       })
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(["test experiment name"]);
@@ -86,7 +86,7 @@ describe("getFilteredExperimentsByDate tests", () => {
       }), 
       dates: Map({
         startDate: "2018-07-22",
-        endDate: "None selected"
+        endDate: ""
       })
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual([]);
