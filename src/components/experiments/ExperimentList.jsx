@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchExperiments } from "../../state/experiments/actions";
-import { getExperimentsCount, getFilteredExperimentsByDate } from "../../state/experiments/selectors";
+import {
+  getExperimentsCount,
+  getFilteredExperimentsByDate
+} from "../../state/experiments/selectors";
 import PropTypes from "prop-types";
 
 export class ExperimentList extends React.Component {
@@ -21,7 +24,8 @@ export class ExperimentList extends React.Component {
 
 ExperimentList.propTypes = {
   experimentCount: PropTypes.number,
-  fetchExperiments: PropTypes.func
+  fetchExperiments: PropTypes.func,
+  filteredExperiments: PropTypes.func
 };
 const mapStateToProps = state => ({
   experimentCount: getExperimentsCount(state),
