@@ -13,10 +13,13 @@ import thunk from "redux-thunk";
 describe("Experiment list component", () => {
   it("should render the experiment count", () => {
     const wrapper = shallow(
-      <ExperimentList experimentCount={113} fetchExperiments={() => {}} />
+      <ExperimentList experimentCount={113} 
+        fetchExperiments={() => {}} 
+        filteredExperiments={[1,2,3]} 
+      />
     );
     const text = wrapper.find("h1").text();
-    expect(text).toEqual("113 experiments");
+    expect(text).toEqual("3 / 113 experiments");
   });
 
   it("should call fetchExperiments()", () => {
@@ -27,6 +30,7 @@ describe("Experiment list component", () => {
         fetchExperiments={() => {
           fetchExperimentsCalled = true;
         }}
+        filteredExperiments={[1,2,3]}
       />
     );
     expect(fetchExperimentsCalled).toBeTruthy();
@@ -38,6 +42,10 @@ describe("Experiment list component", () => {
       Map({
         experiments: Map({
           items: List([])
+        }),
+        dates: Map({
+          start_date: Date.parse("2018-08-22"),
+          end_date: Date.parse("2019-01-20"),
         })
       })
     );
@@ -46,5 +54,46 @@ describe("Experiment list component", () => {
         <ConnectedExperimentList />
       </Provider>
     );
+  });
+});
+
+describe("Test renderTitle() method", () => {
+  it("should be passed both startDate and endDate as props", () => {
+    const wrapper = shallow(
+      <ExperimentList experimentCount={113} 
+        fetchExperiments={() => {}} 
+        filteredExperiments={[1,2,3]} 
+        startDate={"2018-08-22"}
+        endDate={"2019-01-20"}
+      />
+    );
+    const text = wrapper.find("h1").text();
+    expect(text).toEqual("3 / 113 experiments between 2018-08-22 and 2019-01-20");
+  });
+
+  it("should be passed only startDate as props", () => {
+    const wrapper = shallow(
+      <ExperimentList experimentCount={113} 
+        fetchExperiments={() => {}} 
+        filteredExperiments={[1,2,3]} 
+        startDate={"2018-08-22"}
+        endDate={""}
+      />
+    );
+    const text = wrapper.find("h1").text();
+    expect(text).toEqual("3 / 113 experiments after 2018-08-22");
+  });
+
+  it("should be passed only endDate as props", () => {
+    const wrapper = shallow(
+      <ExperimentList experimentCount={113} 
+        fetchExperiments={() => {}} 
+        filteredExperiments={[1,2,3]} 
+        startDate={""}
+        endDate={"2018-08-22"}
+      />
+    );
+    const text = wrapper.find("h1").text();
+    expect(text).toEqual("3 / 113 experiments before 2018-08-22");
   });
 });
