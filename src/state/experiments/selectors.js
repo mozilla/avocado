@@ -30,12 +30,12 @@ export const getFilteredExperimentsByDate = (state) => {
   return filteredExperiments;
 }
 
-const getStartDatepickerTimestamp = (state) => {
+export const getStartDatepickerTimestamp = (state) => {
   const selectedStartDate = state.getIn(["dates", "startDate"]);
   return selectedStartDate ? new Date(selectedStartDate).getTime() : null;
 }
 
-const getEndDatepickerTimestamp = (state) => {
+export const getEndDatepickerTimestamp = (state) => {
   const selectedEndDate = state.getIn(["dates", "endDate"]);
   return selectedEndDate ? new Date(selectedEndDate).getTime() : null;
 }

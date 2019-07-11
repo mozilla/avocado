@@ -7,7 +7,7 @@ import ConnectedExperimentList, {
 } from "../../../components/experiments/ExperimentList";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { List, Map } from "immutable";
+import { fromJS } from "immutable";
 import thunk from "redux-thunk";
 
 describe("Experiment list component", () => {
@@ -15,7 +15,7 @@ describe("Experiment list component", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={List([Map({start_date: "some date"})])}
+        filteredExperiments={fromJS([{start_date: "some date"}])}
       />
     );
     const text = wrapper.find("h1").text();
@@ -30,7 +30,7 @@ describe("Experiment list component", () => {
         fetchExperiments={() => {
           fetchExperimentsCalled = true;
         }}
-        filteredExperiments={List([Map({start_date: "some date"})])}
+        filteredExperiments={fromJS([{start_date: "some date"}])}
       />
     );
     expect(fetchExperimentsCalled).toBeTruthy();
@@ -39,11 +39,11 @@ describe("Experiment list component", () => {
   it("should mount", () => {
     const mockStore = configureStore([thunk]);
     const store = mockStore(
-      Map({
-        experiments: Map({
-          items: List([])
+      fromJS({
+        experiments: fromJS({
+          items: fromJS([])
         }),
-        dates: Map({
+        dates: fromJS({
           start_date: Date.parse("2018-08-22"),
           end_date: Date.parse("2019-01-20"),
         })
@@ -62,7 +62,7 @@ describe("Test renderTitle() method", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={List([Map({})])}
+        filteredExperiments={fromJS([{}])}
         startDate={"2018-08-22"}
         endDate={"2019-01-20"}
       />
@@ -75,7 +75,7 @@ describe("Test renderTitle() method", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={List([Map({})])}
+        filteredExperiments={fromJS([{}])}
         startDate={"2018-08-22"}
         endDate={""}
       />
@@ -88,7 +88,7 @@ describe("Test renderTitle() method", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={List([Map({})])}
+        filteredExperiments={fromJS([{}])}
         startDate={""}
         endDate={"2018-08-22"}
       />
