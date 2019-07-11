@@ -11,14 +11,14 @@ export const getFilteredExperimentsByDate = (state) => {
     const endDate = experiment.get("end_date");
 
     if (selectedStartTimestamp) {
-      if ((startDate && startDate) < selectedStartTimestamp) {
+      if (startDate && (startDate < selectedStartTimestamp)) {
         return false;
       } else if (!startDate) {
         return false;
       }
     }
     if (selectedEndTimestamp) {
-      if ((endDate && endDate) >= selectedEndTimestamp) {
+      if (endDate && (endDate >= selectedEndTimestamp)) {
         return false;
       } else if (!endDate) {
         return false;

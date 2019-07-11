@@ -13,7 +13,7 @@ describe("getExperimentsCount test", () => {
 });
 
 describe("getFilteredExperimentsByDate tests", () => {
-  it("should call getFilteredExperimentsByDate and return the first item in items", () => {
+  it("should return an immutable List of filtered experiments, where 1 experiment falls between startDate and endDate range", () => {
     let mockedState = Map({
       experiments: Map({
         items: List([
@@ -45,7 +45,7 @@ describe("getFilteredExperimentsByDate tests", () => {
     );
   });
 
-  it("should call getFilteredExperimentsByDate, case where experiments don't pass filter", () => {
+  it("should return an empty List, where none of the items in experiments fall between the startDate and endDate ranges", () => {
     let mockedState = Map({
       experiments: Map({
         items: List([
@@ -63,7 +63,7 @@ describe("getFilteredExperimentsByDate tests", () => {
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));
   });
 
-  it("should call getFilteredExperimentsByDate, case where only start datepicker is selected and item should be returned in filtered List", () => {
+  it("should return all experiments with start date after startDate", () => {
     let mockedState = Map({
       experiments: Map({
         items: List([
@@ -90,7 +90,7 @@ describe("getFilteredExperimentsByDate tests", () => {
     );
   });
 
-  it("should call getFilteredExperimentsByDate, case where only start datepicker is selected, and no filter results", () => {
+  it("should return an empty List because all experiment start dates are before chosen startDates", () => {
     let mockedState = Map({
       experiments: Map({
         items: List([
@@ -103,6 +103,60 @@ describe("getFilteredExperimentsByDate tests", () => {
       dates: Map({
         startDate: "2018-07-22",
         endDate: ""
+      })
+    });
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));
+  });
+
+  it("should return empty List because experiment start date is null", () => {
+    let mockedState = Map({
+      experiments: Map({
+        items: List([
+          Map({
+            start_date: null,
+            end_date: Date.parse("2019-01-20")
+          })
+        ])
+      }), 
+      dates: Map({
+        startDate: "2018-07-22",
+        endDate: ""
+      })
+    });
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));
+  });
+
+  it("should return an empty List because all experiment end dates are after chosen endDates", () => {
+    let mockedState = Map({
+      experiments: Map({
+        items: List([
+          Map({
+            start_date: Date.parse("2017-08-22"),
+            end_date: Date.parse("2019-01-20")
+          })
+        ])
+      }), 
+      dates: Map({
+        startDate: "",
+        endDate: "2016-07-22"
+      })
+    });
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));
+  });
+
+  it("should return empty List because experiment end date is null", () => {
+    let mockedState = Map({
+      experiments: Map({
+        items: List([
+          Map({
+            start_date: Date.parse("2019-01-20"),
+            end_date: null
+          })
+        ])
+      }), 
+      dates: Map({
+        startDate: "",
+        endDate: "2018-07-22"
       })
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));

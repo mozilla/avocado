@@ -58,7 +58,7 @@ describe("Experiment list component", () => {
 });
 
 describe("Test renderTitle() method", () => {
-  it("should filter out an experiment that falls between startDate and endDate", () => {
+  it("should render a title showing 1 experiment filtered, and the date range that it falls between", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
@@ -71,7 +71,7 @@ describe("Test renderTitle() method", () => {
     expect(text).toEqual("1 / 113 experiments after 2018-08-22 before 2019-01-20");
   });
 
-  it("should filter out ", () => {
+  it("should render a title showing number of experiments filtered after startDate out of total number of experiments, and startDate", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
@@ -84,7 +84,7 @@ describe("Test renderTitle() method", () => {
     expect(text).toEqual("1 / 113 experiments after 2018-08-22");
   });
 
-  it("should be passed only endDate as props", () => {
+  it("should render a title showing number of experiments that happen before endDate out of total number of experiments, and endDate", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
