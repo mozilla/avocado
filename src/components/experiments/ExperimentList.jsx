@@ -7,6 +7,7 @@ import {
 } from "../../state/experiments/selectors";
 import { getStartDate, getEndDate } from "../../state/dates/selectors";
 import PropTypes from "prop-types";
+import { List } from 'immutable';
 
 export class ExperimentList extends React.Component {
   componentDidMount() {
@@ -15,11 +16,10 @@ export class ExperimentList extends React.Component {
 
   renderTitle() {
     let title = "experiments";
-    if (this.props.startDate && this.props.endDate) {
-      title += ` between ${this.props.startDate} and ${this.props.endDate}`;
-    } else if (this.props.startDate) {
+    if (this.props.startDate) {
       title += ` after ${this.props.startDate}`;
-    } else if (this.props.endDate) {
+    }
+    if (this.props.endDate) {
       title += ` before ${this.props.endDate}`;
     }
 
@@ -30,10 +30,23 @@ export class ExperimentList extends React.Component {
     return (
       <div>
         <h1>
-          {this.props.filteredExperiments.length} / {this.props.experimentCount}{" "}
+          {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
           {this.renderTitle()}
         </h1>
-        <h6>Experiments: {this.props.filteredExperiments}</h6>
+        <h6>
+          <table>
+            <tbody>
+              {this.props.filteredExperiments.map(function(item, key) {
+                return (
+                  <tr key = {key + 1}>
+                    <td>{new Date(item.get("start_date")).toGMTString() }</td>
+                    <td>{item.get("name")}</td>
+                  </tr>
+                  )
+              })}
+            </tbody>
+          </table>
+        </h6>
       </div>
     );
   }
@@ -42,7 +55,7 @@ export class ExperimentList extends React.Component {
 ExperimentList.propTypes = {
   experimentCount: PropTypes.number,
   fetchExperiments: PropTypes.func,
-  filteredExperiments: PropTypes.array,
+  filteredExperiments: PropTypes.instanceOf(List),
   startDate: PropTypes.string,
   endDate: PropTypes.string
 };

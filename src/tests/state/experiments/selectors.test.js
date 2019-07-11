@@ -34,7 +34,15 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: "2019-07-22"
       })
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(["test experiment name 1"]);
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(
+      List([
+        Map({
+          "start_date": Date.parse("2018-08-22"),
+          "end_date": Date.parse("2019-01-20"),
+          "name": "test experiment name 1"
+        })
+      ])
+    );
   });
 
   it("should call getFilteredExperimentsByDate, case where experiments don't pass filter", () => {
@@ -52,7 +60,7 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: "2019-07-22"
       })
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual([]);
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));
   });
 
   it("should call getFilteredExperimentsByDate, case where only start datepicker is selected and item should be returned in filtered List", () => {
@@ -71,7 +79,15 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: ""
       })
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(["test experiment name"]);
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(
+      List([
+        Map({
+          "start_date": Date.parse("2018-08-22"),
+          "end_date": Date.parse("2019-08-22"),
+          "name": "test experiment name"
+        })
+      ])
+    );
   });
 
   it("should call getFilteredExperimentsByDate, case where only start datepicker is selected, and no filter results", () => {
@@ -89,6 +105,6 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: ""
       })
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual([]);
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(List([]));
   });
 });

@@ -15,11 +15,11 @@ describe("Experiment list component", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={[1,2,3]} 
+        filteredExperiments={List([Map({start_date: "some date"})])}
       />
     );
     const text = wrapper.find("h1").text();
-    expect(text).toEqual("3 / 113 experiments");
+    expect(text).toEqual("1 / 113 experiments");
   });
 
   it("should call fetchExperiments()", () => {
@@ -30,7 +30,7 @@ describe("Experiment list component", () => {
         fetchExperiments={() => {
           fetchExperimentsCalled = true;
         }}
-        filteredExperiments={[1,2,3]}
+        filteredExperiments={List([Map({start_date: "some date"})])}
       />
     );
     expect(fetchExperimentsCalled).toBeTruthy();
@@ -58,42 +58,42 @@ describe("Experiment list component", () => {
 });
 
 describe("Test renderTitle() method", () => {
-  it("should be passed both startDate and endDate as props", () => {
+  it("should filter out an experiment that falls between startDate and endDate", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={[1,2,3]} 
+        filteredExperiments={List([Map({})])}
         startDate={"2018-08-22"}
         endDate={"2019-01-20"}
       />
     );
     const text = wrapper.find("h1").text();
-    expect(text).toEqual("3 / 113 experiments between 2018-08-22 and 2019-01-20");
+    expect(text).toEqual("1 / 113 experiments after 2018-08-22 before 2019-01-20");
   });
 
-  it("should be passed only startDate as props", () => {
+  it("should filter out ", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={[1,2,3]} 
+        filteredExperiments={List([Map({})])}
         startDate={"2018-08-22"}
         endDate={""}
       />
     );
     const text = wrapper.find("h1").text();
-    expect(text).toEqual("3 / 113 experiments after 2018-08-22");
+    expect(text).toEqual("1 / 113 experiments after 2018-08-22");
   });
 
   it("should be passed only endDate as props", () => {
     const wrapper = shallow(
       <ExperimentList experimentCount={113} 
         fetchExperiments={() => {}} 
-        filteredExperiments={[1,2,3]} 
+        filteredExperiments={List([Map({})])}
         startDate={""}
         endDate={"2018-08-22"}
       />
     );
     const text = wrapper.find("h1").text();
-    expect(text).toEqual("3 / 113 experiments before 2018-08-22");
+    expect(text).toEqual("1 / 113 experiments before 2018-08-22");
   });
 });
