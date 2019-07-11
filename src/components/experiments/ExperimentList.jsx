@@ -7,7 +7,7 @@ import {
 } from "../../state/experiments/selectors";
 import { getStartDate, getEndDate } from "../../state/dates/selectors";
 import PropTypes from "prop-types";
-import { List } from 'immutable';
+import { List } from "immutable";
 
 export class ExperimentList extends React.Component {
   componentDidMount() {
@@ -38,11 +38,11 @@ export class ExperimentList extends React.Component {
             <tbody>
               {this.props.filteredExperiments.map(function(item, key) {
                 return (
-                  <tr key = {key + 1}>
-                    <td>{new Date(item.get("start_date")).toGMTString() }</td>
+                  <tr key={key + 1}>
+                    <td>{new Date(item.get("start_date")).toGMTString()}</td>
                     <td>{item.get("name")}</td>
                   </tr>
-                  )
+                );
               })}
             </tbody>
           </table>
