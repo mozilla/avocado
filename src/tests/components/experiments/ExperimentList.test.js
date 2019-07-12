@@ -40,13 +40,13 @@ describe("Experiment list component", () => {
     const mockStore = configureStore([thunk]);
     const store = mockStore(
       fromJS({
-        experiments: fromJS({
-          items: fromJS([])
-        }),
-        dates: fromJS({
+        experiments: {
+          items: []
+        },
+        dates: {
           start_date: Date.parse("2018-08-22"),
           end_date: Date.parse("2019-01-20"),
-        })
+        }
       })
     );
     mount(
