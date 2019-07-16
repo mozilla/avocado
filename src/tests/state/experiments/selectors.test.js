@@ -1,7 +1,6 @@
 import { fromJS } from "immutable";
-import { getExperimentsCount, getFilteredExperimentsByDate, 
-  getStartDatepickerTimestamp, getEndDatepickerTimestamp 
-} from "../../../state/experiments/selectors";
+import { getExperimentsCount, getFilteredExperimentsByDate } from "../../../state/experiments/selectors";
+import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from "../../../state/dates/selectors";
 
 describe("getExperimentsCount test", () => {
   it("should get experiment count", () => {
@@ -122,43 +121,5 @@ describe("getFilteredExperimentsByDate tests", () => {
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
-  });
-});
-
-describe("timestamp helper functions (getStartDatepickerTimestamp, getEndDatepickerTimestamp) tests", () => {
-  it("should return the startDate timestamp when startDate is not null", () => {
-    const mockedState = fromJS({
-      dates: {
-        startDate: "2018-07-22"
-      }
-    });
-    expect(getStartDatepickerTimestamp(mockedState)).toEqual(1532217600000);
-  });
-
-  it("should return null when startDate is null", () => {
-    const mockedState = fromJS({
-      dates: {
-        startDate: null
-      }
-    });
-    expect(getStartDatepickerTimestamp(mockedState)).toEqual(null);
-  });
-
-  it("should return the endDate timestamp when endDate is not null", () => {
-    const mockedState = fromJS({
-      dates: {
-        endDate: "2018-07-22"
-      }
-    });
-    expect(getEndDatepickerTimestamp(mockedState)).toEqual(1532217600000);
-  });
-
-  it("should return null when endDate is null", () => {
-    const mockedState = fromJS({
-      dates: {
-        endDate: null
-      }
-    });
-    expect(getEndDatepickerTimestamp(mockedState)).toEqual(null);
   });
 });
