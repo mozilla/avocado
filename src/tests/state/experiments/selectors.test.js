@@ -15,103 +15,72 @@ describe("getExperimentsCount test", () => {
 });
 
 describe("getFilteredExperimentsByDate tests", () => {
+  const experiment1 = {
+    start_date: Date.parse("2018-08-22"),
+    end_date: Date.parse("2019-01-20"),
+    name: "test experiment name 1"
+  };
+
+  const experiment2 = {
+    start_date: Date.parse("2017-08-22"),
+    end_date: Date.parse("2019-01-20"),
+    name: "test experiment name 2"
+  }
+
+  const mockedExperiments = {
+    items: [
+      experiment1,
+      experiment2
+    ]
+  }
+  
   it("should return an immutable List of filtered experiments, where 1 experiment falls between startDate and endDate range", () => {
-    let mockedState = fromJS({
-      experiments: {
-        items: [
-          {
-            start_date: Date.parse("2018-08-22"),
-            end_date: Date.parse("2019-01-20"),
-            name: "test experiment name 1"
-          },
-          {
-            start_date: Date.parse("2017-08-22"),
-            end_date: Date.parse("2019-01-20"),
-            name: "test experiment name 2"
-          }
-        ]
-      }, 
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
       dates: {
         startDate: "2018-07-22",
         endDate: "2019-07-22"
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(
-      fromJS([
-        {
-          "start_date": Date.parse("2018-08-22"),
-          "end_date": Date.parse("2019-01-20"),
-          "name": "test experiment name 1"
-        }
-      ])
-    );
+
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1]));
   });
 
   it("should return an empty List, where none of the items in experiments fall between the startDate and endDate ranges", () => {
-    let mockedState = fromJS({
-      experiments: {
-        items: [
-          {
-            start_date: Date.parse("2017-08-22"),
-            end_date: Date.parse("2019-01-20")
-          }
-        ]
-      }, 
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
       dates: {
-        startDate: "2018-07-22",
-        endDate: "2019-07-22"
+        startDate: "2019-12-01",
+        endDate: "2019-12-31"
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return all experiments with start date after startDate", () => {
-    let mockedState = fromJS({
-      experiments: {
-        items: [
-          {
-            start_date: Date.parse("2018-08-22"),
-            end_date: Date.parse("2019-08-22"),
-            name: "test experiment name"
-          }
-        ]
-      }, 
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
       dates: {
-        startDate: "2018-07-22",
-        endDate: ""
+        startDate: "2018-08-01",
+        endDate: null
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(
-      fromJS([
-        {
-          "start_date": Date.parse("2018-08-22"),
-          "end_date": Date.parse("2019-08-22"),
-          "name": "test experiment name"
-        }
-      ])
-    );
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1]));
   });
 
   it("should return an empty List because all experiment start dates are before chosen startDates", () => {
-    let mockedState = fromJS({
-      experiments: {
-        items: [
-          {
-            start_date: Date.parse("2017-08-22"),
-            end_date: Date.parse("2019-01-20")
-          }
-        ]
-      }, 
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
       dates: {
-        startDate: "2018-07-22",
-        endDate: ""
+        startDate: "2018-08-23",
+        endDate: null
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return empty List because experiment start date is null", () => {
-    let mockedState = fromJS({
+    const mockedState = fromJS({
       experiments: {
         items: [
           {
@@ -121,25 +90,17 @@ describe("getFilteredExperimentsByDate tests", () => {
         ]
       }, 
       dates: {
-        startDate: "2018-07-22",
-        endDate: ""
+        startDate: "2018-07-22"
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return an empty List because all experiment end dates are after chosen endDates", () => {
-    let mockedState = fromJS({
-      experiments: {
-        items: [
-          {
-            start_date: Date.parse("2017-08-22"),
-            end_date: Date.parse("2019-01-20")
-          }
-        ]
-      }, 
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
       dates: {
-        startDate: "",
+        startDate: null,
         endDate: "2016-07-22"
       }
     });
@@ -147,7 +108,7 @@ describe("getFilteredExperimentsByDate tests", () => {
   });
 
   it("should return empty List because experiment end date is null", () => {
-    let mockedState = fromJS({
+    const mockedState = fromJS({
       experiments: {
         items: [
           {
@@ -157,7 +118,6 @@ describe("getFilteredExperimentsByDate tests", () => {
         ]
       }, 
       dates: {
-        startDate: "",
         endDate: "2018-07-22"
       }
     });
@@ -167,7 +127,7 @@ describe("getFilteredExperimentsByDate tests", () => {
 
 describe("timestamp helper functions (getStartDatepickerTimestamp, getEndDatepickerTimestamp) tests", () => {
   it("should return the startDate timestamp when startDate is not null", () => {
-    let mockedState = fromJS({
+    const mockedState = fromJS({
       dates: {
         startDate: "2018-07-22"
       }
@@ -175,17 +135,17 @@ describe("timestamp helper functions (getStartDatepickerTimestamp, getEndDatepic
     expect(getStartDatepickerTimestamp(mockedState)).toEqual(1532217600000);
   });
 
-  it("should return null when startDate is empty string", () => {
-    let mockedState = fromJS({
+  it("should return null when startDate is null", () => {
+    const mockedState = fromJS({
       dates: {
-        startDate: ""
+        startDate: null
       }
     });
     expect(getStartDatepickerTimestamp(mockedState)).toEqual(null);
   });
 
   it("should return the endDate timestamp when endDate is not null", () => {
-    let mockedState = fromJS({
+    const mockedState = fromJS({
       dates: {
         endDate: "2018-07-22"
       }
@@ -193,10 +153,10 @@ describe("timestamp helper functions (getStartDatepickerTimestamp, getEndDatepic
     expect(getEndDatepickerTimestamp(mockedState)).toEqual(1532217600000);
   });
 
-  it("should return null when endDate is empty string", () => {
-    let mockedState = fromJS({
+  it("should return null when endDate is null", () => {
+    const mockedState = fromJS({
       dates: {
-        endDate: ""
+        endDate: null
       }
     });
     expect(getEndDatepickerTimestamp(mockedState)).toEqual(null);

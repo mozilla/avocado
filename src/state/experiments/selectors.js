@@ -1,12 +1,15 @@
+const getExperiments = state =>
+  state.getIn(["experiments", "items"]);
+
 export const getExperimentsCount = state =>
-  state.get("experiments").get("items").size;
+  getExperiments(state).size;
 
 export const getFilteredExperimentsByDate = (state) => {
-  const experiments = state.get("experiments").get("items"); 
+  const experiments = getExperiments(state); 
   const selectedStartTimestamp = getStartDatepickerTimestamp(state);
   const selectedEndTimestamp = getEndDatepickerTimestamp(state);
 
-  const filteredExperiments = experiments.filter(experiment => {
+  return experiments.filter(experiment => {
     const startDate = experiment.get("start_date");
     const endDate = experiment.get("end_date");
 
@@ -27,7 +30,6 @@ export const getFilteredExperimentsByDate = (state) => {
 
     return true;
   });
-  return filteredExperiments;
 }
 
 export const getStartDatepickerTimestamp = (state) => {

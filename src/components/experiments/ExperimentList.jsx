@@ -33,20 +33,6 @@ export class ExperimentList extends React.Component {
           {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
           {this.renderTitle()}
         </h1>
-        <h6>
-          <table>
-            <tbody>
-              {this.props.filteredExperiments.map(function(item, key) {
-                return (
-                  <tr key={key + 1}>
-                    <td>{new Date(item.get("start_date")).toGMTString()}</td>
-                    <td>{item.get("name")}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </h6>
       </div>
     );
   }
