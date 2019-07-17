@@ -3,7 +3,7 @@ import { START_DATE_SELECTED, END_DATE_SELECTED } from "../../../state/action-ty
 
 describe("Date Reducer", () => {
   it("should test default action for start date selection", () => {
-    let expectedState = "None selected";
+    let expectedState = null;
     expect(startDate(undefined, {})).toEqual(expectedState);
   });
 
@@ -17,7 +17,7 @@ describe("Date Reducer", () => {
   });
 
   it("should test default action for end date selection", () => {
-    let expectedState = "None selected";
+    let expectedState = null;
     expect(endDate(undefined, {})).toEqual(expectedState);
   });
   

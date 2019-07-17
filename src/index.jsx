@@ -8,6 +8,7 @@ import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
 import dates from "./state/dates/reducer";
 import thunk from "redux-thunk";
+import { Map } from "immutable";
 import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
 
 const logger = () => next => action => {
@@ -29,6 +30,7 @@ const crashReporter = () => next => action => {
 
 const store = createStore(
   combineReducers({ experiments, dates }),
+  new Map(),
   applyMiddleware(logger, crashReporter, thunk)
 );
 

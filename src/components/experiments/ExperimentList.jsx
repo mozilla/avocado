@@ -1,18 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchExperiments } from "../../state/experiments/actions";
-import { getExperimentsCount } from "../../state/experiments/selectors";
+import {
+  getExperimentsCount,
+  getFilteredExperimentsByDate
+} from "../../state/experiments/selectors";
+import { getStartDate, getEndDate } from "../../state/dates/selectors";
 import PropTypes from "prop-types";
+import { List } from "immutable";
 
 export class ExperimentList extends React.Component {
   componentDidMount() {
     this.props.fetchExperiments();
   }
 
+  renderTitle() {
+    let title = "experiments";
+    if (this.props.startDate) {
+      title += ` after ${this.props.startDate}`;
+    }
+    if (this.props.endDate) {
+      title += ` before ${this.props.endDate}`;
+    }
+
+    return title;
+  }
+
   render() {
     return (
       <div>
-        <h1>{this.props.experimentCount} experiments</h1>
+        <h1>
+          {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
+          {this.renderTitle()}
+        </h1>
       </div>
     );
   }
@@ -20,10 +40,16 @@ export class ExperimentList extends React.Component {
 
 ExperimentList.propTypes = {
   experimentCount: PropTypes.number,
-  fetchExperiments: PropTypes.func
+  fetchExperiments: PropTypes.func,
+  filteredExperiments: PropTypes.instanceOf(List),
+  startDate: PropTypes.string,
+  endDate: PropTypes.string
 };
 const mapStateToProps = state => ({
-  experimentCount: getExperimentsCount(state)
+  experimentCount: getExperimentsCount(state),
+  filteredExperiments: getFilteredExperimentsByDate(state),
+  startDate: getStartDate(state),
+  endDate: getEndDate(state)
 });
 
 const mapDispatchToProps = dispatch => ({
