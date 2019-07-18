@@ -1,8 +1,8 @@
 export const getStartDate = state =>
-  state.get("dates").get("startDate");
+  state.getIn(["dates", "startDate"]);
 
 export const getEndDate = state =>
-  state.get("dates").get("endDate");
+  state.getIn(["dates", "endDate"]);
 
 export const getStartDatepickerTimestamp = (state) => {
   const selectedStartDate = state.getIn(["dates", "startDate"]);
