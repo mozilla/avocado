@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ExperimentTable } from "./ExperimentTable";
 import { fetchExperiments } from "../../state/experiments/actions";
 import {
   getExperimentsCount,
@@ -33,22 +34,7 @@ export class ExperimentList extends React.Component {
           {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
           {this.renderTitle()}
         </h1>
-        <h6>
-          <table>
-            <tbody>
-              {this.props.filteredExperiments.map(function(item, key) {
-                return (
-                  <tr key={key + 1}>
-                    <td>{item.get("name")}</td>
-                    <td>{new Date(item.get("start_date")).toGMTString()}</td>
-                    <td>{new Date(item.get("end_date")).toGMTString()}</td>
-                    <td>{item.get("status")}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </h6>
+        <ExperimentTable {...this.props} />
       </div>
     );
   }
