@@ -5,7 +5,6 @@ import { List } from "immutable";
 export class ExperimentTable extends React.Component {
   render() {
     return (
-      <div>
         <table>
           <thead>
             <tr>
@@ -28,7 +27,6 @@ export class ExperimentTable extends React.Component {
             })}
           </tbody>
         </table>
-      </div>
     );
   }
 }
