@@ -19,8 +19,16 @@ export class ExperimentTable extends React.Component {
             return (
               <tr key={key}>
                 <td>{item.get("name")}</td>
-                <td>{new Date(item.get("start_date")).toGMTString()}</td>
-                <td>{new Date(item.get("end_date")).toGMTString()}</td>
+                <td>
+                  {new Date(item.get("start_date"))
+                    .toGMTString()
+                    .replace(" 00:00:00 GMT", "")}
+                </td>
+                <td>
+                  {new Date(item.get("end_date"))
+                    .toGMTString()
+                    .replace(" 00:00:00 GMT", "")}
+                </td>
                 <td>{item.get("status")}</td>
               </tr>
             );
