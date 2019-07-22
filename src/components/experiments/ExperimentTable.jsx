@@ -4,6 +4,12 @@ import { List } from "immutable";
 
 export class ExperimentTable extends React.Component {
   render() {
+    const formatDate = dateString => {
+      return new Date(dateString)
+        .toUTCString()
+        .replace(/\s*[0-9]{2}:[0-9]{2}:[0-9]{2} GMT$/i, "");
+    }
+
     return (
       <table>
         <thead>
@@ -20,14 +26,10 @@ export class ExperimentTable extends React.Component {
               <tr key={key}>
                 <td>{item.get("name")}</td>
                 <td>
-                  {new Date(item.get("start_date"))
-                    .toGMTString()
-                    .replace(" 00:00:00 GMT", "")}
+                  {formatDate(item.get("start_date"))}
                 </td>
                 <td>
-                  {new Date(item.get("end_date"))
-                    .toGMTString()
-                    .replace(" 00:00:00 GMT", "")}
+                  {formatDate(item.get("end_date"))}
                 </td>
                 <td>{item.get("status")}</td>
               </tr>
