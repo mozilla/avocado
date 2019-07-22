@@ -15,20 +15,27 @@ export class TypeSelector extends React.Component {
 
   render() {
     return (
-        <React.Fragment>
-            <h4>Type:</h4>
-            <select id="typeSelector" onChange={this.onChange} value={this.props.value}>
-                <option value="">--Please choose an option--</option>
-                <option value="addon">Add-on</option>
-                <option value="pref">Pref</option>
-            </select>
-        </React.Fragment>
+      <React.Fragment>
+        <h4>Type:</h4>
+        <select
+          id="typeSelector"
+          onChange={this.onChange}
+          value={this.props.value}
+        >
+          <option value="">--Please choose a type--</option>
+          <option value="addon">Add-on</option>
+          <option value="pref">Pref</option>
+        </select>
+      </React.Fragment>
     );
   }
 }
 
 TypeSelector.propTypes = {
-
+  value: PropTypes.string,
+  setType: PropTypes.func,
+  dispatch: PropTypes.func,
+  onChangeAction: PropTypes.string
 };
 
 const mapStateToProps = state => ({

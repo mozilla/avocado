@@ -4,7 +4,7 @@ import { ExperimentTable } from "./ExperimentTable";
 import { fetchExperiments } from "../../state/experiments/actions";
 import {
   getExperimentsCount,
-  getFilteredExperimentsByDate
+  getFilteredExperiments
 } from "../../state/experiments/selectors";
 import { getStartDate, getEndDate } from "../../state/dates/selectors";
 import PropTypes from "prop-types";
@@ -49,7 +49,7 @@ ExperimentList.propTypes = {
 };
 const mapStateToProps = state => ({
   experimentCount: getExperimentsCount(state),
-  filteredExperiments: getFilteredExperimentsByDate(state),
+  filteredExperiments: getFilteredExperiments(state),
   startDate: getStartDate(state),
   endDate: getEndDate(state)
 });

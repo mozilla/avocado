@@ -7,7 +7,7 @@ const getExperiments = state =>
 export const getExperimentsCount = state =>
   getExperiments(state).size;
 
-export const getFilteredExperimentsByDate = (state) => {
+export const getFilteredExperiments = (state) => {
   const experiments = getExperiments(state); 
   const selectedStartTimestamp = getStartDatepickerTimestamp(state);
   const selectedEndTimestamp = getEndDatepickerTimestamp(state);
@@ -32,7 +32,7 @@ export const getFilteredExperimentsByDate = (state) => {
         return false;
       }
     }
-    if (selectedType && type !== selectedType) {
+    if (selectedType && (type !== selectedType)) {
       return false;
     }
 
