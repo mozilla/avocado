@@ -8,7 +8,7 @@ export class ExperimentTable extends React.Component {
       return new Date(dateString)
         .toUTCString()
         .replace(/\s*[0-9]{2}:[0-9]{2}:[0-9]{2} GMT$/i, "");
-    }
+    };
 
     return (
       <table>
@@ -25,12 +25,8 @@ export class ExperimentTable extends React.Component {
             return (
               <tr key={key}>
                 <td>{item.get("name")}</td>
-                <td>
-                  {formatDate(item.get("start_date"))}
-                </td>
-                <td>
-                  {formatDate(item.get("end_date"))}
-                </td>
+                <td>{formatDate(item.get("start_date"))}</td>
+                <td>{formatDate(item.get("end_date"))}</td>
                 <td>{item.get("status")}</td>
               </tr>
             );
