@@ -10,7 +10,7 @@ export class TypeSelector extends React.Component {
   }
 
   onChange(event) {
-    this.props.dispatch(setType(event.target.value, this.props.onChangeAction));
+    this.props.dispatch(setType(event.target.value));
   }
 
   render() {
@@ -34,8 +34,7 @@ export class TypeSelector extends React.Component {
 TypeSelector.propTypes = {
   value: PropTypes.string,
   setType: PropTypes.func,
-  dispatch: PropTypes.func,
-  onChangeAction: PropTypes.string
+  dispatch: PropTypes.func
 };
 
 const mapStateToProps = state => ({
