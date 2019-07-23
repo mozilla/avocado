@@ -146,4 +146,15 @@ describe("getFilteredExperiments tests", () => {
 
     expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment2]));
   });
+
+  it("should return experiments of all types", () => {
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
+      type: {
+        selectedType: null
+      }
+    });
+
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+  });
 });

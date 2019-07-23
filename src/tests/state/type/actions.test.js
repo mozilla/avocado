@@ -25,4 +25,16 @@ describe("test actions for type", () => {
 
         setTypeAction(dispatch);
     });
+
+    it("should set the type selected to both", done => {
+        let setTypeAction = setType("", TYPE_SELECTED);
+
+        let dispatch = action => {
+            expect(action.data).toEqual("");
+            expect(action.type).toEqual(TYPE_SELECTED);
+            done();
+        };
+
+        setTypeAction(dispatch);
+    });
 });

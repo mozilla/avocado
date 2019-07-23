@@ -22,7 +22,7 @@ export class TypeSelector extends React.Component {
           onChange={this.onChange}
           value={this.props.value}
         >
-          <option value="">--Please choose a type--</option>
+          <option value="">--All--</option>
           <option value="addon">Add-on</option>
           <option value="pref">Pref</option>
         </select>
