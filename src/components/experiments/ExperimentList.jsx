@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ExperimentTable } from "./ExperimentTable";
 import { fetchExperiments } from "../../state/experiments/actions";
 import {
   getExperimentsCount,
@@ -33,6 +34,7 @@ export class ExperimentList extends React.Component {
           {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
           {this.renderTitle()}
         </h1>
+        <ExperimentTable {...this.props} />
       </div>
     );
   }
