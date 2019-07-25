@@ -34,7 +34,7 @@ export class StatusSelector extends React.Component {
 
 StatusSelector.propTypes = {
   value: PropTypes.string,
-  setDate: PropTypes.func,
+  setStatus: PropTypes.func,
   dispatch: PropTypes.func
 };
 

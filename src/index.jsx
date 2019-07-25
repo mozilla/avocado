@@ -40,6 +40,7 @@ const store = createStore(
 
 const App = () => (
   <React.Fragment>
+    <ConnectedStatusSelector />
     <ExperimentList />
     <h4>Start Date: </h4>
     <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
