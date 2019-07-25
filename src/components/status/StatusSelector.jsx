@@ -16,17 +16,17 @@ export class StatusSelector extends React.Component {
   render() {
     return (
       <div>
-          <h4>Status:</h4>
-          <select id="status" onChange={this.onChange} value={this.props.value}>
-            <option value="">All</option>
-            <option value="rejected">rejected</option>
-            <option value="draft">draft</option>
-            <option value="review">review</option>
-            <option value="ship">ship</option>
-            <option value="accepted">accepted</option>
-            <option value="live">live</option>
-            <option value="complete">complete</option>
-          </select>
+        <h4>Status:</h4>
+        <select id="status" onChange={this.onChange} value={this.props.value}>
+          <option value="">All</option>
+          <option value="rejected">rejected</option>
+          <option value="draft">draft</option>
+          <option value="review">review</option>
+          <option value="ship">ship</option>
+          <option value="accepted">accepted</option>
+          <option value="live">live</option>
+          <option value="complete">complete</option>
+        </select>
       </div>
     );
   }
@@ -43,4 +43,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(StatusSelector);
-
