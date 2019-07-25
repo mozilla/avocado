@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import ExperimentList from "./components/experiments/ExperimentList";
 import ConnectedDatePicker from "./components/dates/DatePicker";
 import ConnectedTypeSelector from "./components/type/TypeSelector";
-import ConnectedStatusPicker from "./components/status/StatusPicker"
+import ConnectedStatusSelector from "./components/status/StatusSelector"
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
@@ -46,7 +46,7 @@ const App = () => (
     <h4>End Date: </h4>
     <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
     <ConnectedTypeSelector />
-    <ConnectedStatusPicker />
+    <ConnectedStatusSelector />
   </React.Fragment>
 );
 

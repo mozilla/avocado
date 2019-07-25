@@ -18,14 +18,16 @@ describe("getFilteredExperiments tests", () => {
     start_date: Date.parse("2018-08-22"),
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 1",
-    type: "pref"
+    type: "pref",
+    status: "draft"
   };
 
   const experiment2 = {
     start_date: Date.parse("2017-08-22"),
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 2",
-    type: "addon"
+    type: "addon",
+    status: "live"
   }
 
   const mockedExperiments = {
@@ -156,5 +158,25 @@ describe("getFilteredExperiments tests", () => {
     });
 
     expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+  });
+
+  it("should filter status, and return experiments that have reached at least draft", () => {
+    let mockedState = fromJS({
+      experiments: mockedExperiments,
+      status: {
+        selectedStatus: "draft"
+      }
+    });
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+  });
+
+  it("should filter status, and return experiments that have reached at least live", () => {
+    let mockedState = fromJS({
+      experiments: mockedExperiments,
+      status: {
+        selectedStatus: "live"
+      }
+    });
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment2]));
   });
 });
