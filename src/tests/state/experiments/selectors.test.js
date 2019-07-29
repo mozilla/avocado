@@ -1,6 +1,7 @@
 import { fromJS } from "immutable";
 import { getExperimentsCount, getFilteredExperiments } from "../../../state/experiments/selectors";
 import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from "../../../state/dates/selectors";
+import { getExperimentsCount, getFilteredExperimentsByDate } from "../../../state/experiments/selectors";
 
 describe("getExperimentsCount test", () => {
   it("should get experiment count", () => {
@@ -19,7 +20,7 @@ describe("getFilteredExperiments tests", () => {
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 1",
     type: "pref",
-    status: "draft"
+    status: "Draft"
   };
 
   const experiment2 = {
@@ -27,7 +28,7 @@ describe("getFilteredExperiments tests", () => {
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 2",
     type: "addon",
-    status: "live"
+    status: "Live"
   }
 
   const mockedExperiments = {
@@ -164,7 +165,7 @@ describe("getFilteredExperiments tests", () => {
     let mockedState = fromJS({
       experiments: mockedExperiments,
       status: {
-        selectedStatus: "draft"
+        selectedStatus: "Draft"
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1, experiment2]));
@@ -174,7 +175,7 @@ describe("getFilteredExperiments tests", () => {
     let mockedState = fromJS({
       experiments: mockedExperiments,
       status: {
-        selectedStatus: "live"
+        selectedStatus: "Live"
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment2]));
