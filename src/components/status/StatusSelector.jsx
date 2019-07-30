@@ -19,7 +19,7 @@ export class StatusSelector extends React.Component {
       <div>
         <h4>Status:</h4>
         <select id="status" onChange={this.onChange} value={this.props.value}>
-          <option>All</option>
+          <option value="">All</option>
           {Object.keys(STATUSES).map(status => (
             <option value={status} key={status}>
               {status}

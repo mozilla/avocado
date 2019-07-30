@@ -180,4 +180,14 @@ describe("getFilteredExperiments tests", () => {
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment2]));
   });
+
+  it("should have filter status set to `All`, and return all experiments", () => {
+    let mockedState = fromJS({
+      experiments: mockedExperiments,
+      status: {
+        selectedStatus: null
+      }
+    });
+    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+  });
 });

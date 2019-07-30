@@ -12,7 +12,7 @@ describe("Status selectors", () => {
         expect(getStatus(mockedState)).toEqual("Draft");
     });
 
-    it("should return null when status is null", () => {
+    it("should return null when status `All` is selected ", () => {
         const mockedState = fromJS({
             status: {
               selectedStatus: null

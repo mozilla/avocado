@@ -15,4 +15,13 @@ describe("Status Reducer", () => {
     });
     expect(reducerResult).toEqual(expectedState);
   });
+
+  it("should return null state when empty string from selecting case `All`", () => {
+    let expectedState = null;
+    let reducerResult = selectedStatus(undefined, {
+      type: STATUS_SELECTED,
+      data: ""
+    });
+    expect(reducerResult).toEqual(expectedState);
+  });
 });
