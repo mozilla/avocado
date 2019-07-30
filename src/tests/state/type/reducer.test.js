@@ -24,4 +24,13 @@ describe("Type Reducer", () => {
     });
     expect(reducerResult).toEqual(expectedState);
   });
+
+  it("should test empty string case, and return null state", () => {
+    let expectedState = null;
+    let reducerResult = selectedType(undefined, {
+      type: TYPE_SELECTED,
+      data: ""
+    });
+    expect(reducerResult).toEqual(expectedState);
+  });
 });

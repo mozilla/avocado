@@ -4,7 +4,7 @@ import { TYPE_SELECTED } from "../action-types";
 export const selectedType = (state = null, action) => {
   switch (action.type) {
     case TYPE_SELECTED:
-      return action.data;
+      return action.data ? action.data : null;
     default:
       return state;
   }

@@ -21,4 +21,14 @@ describe("Type selectors", () => {
       
         expect(getType(mockedState)).toEqual("pref");
     });
+
+    it("should get all types", () => {
+        let mockedState = fromJS({
+            type: {
+                selectedType: null
+            }
+        });
+      
+        expect(getType(mockedState)).toEqual(null);
+    });
 });
