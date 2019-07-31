@@ -1,5 +1,5 @@
 import { fromJS } from "immutable";
-import { getExperimentsCount, getFilteredExperimentsByDate } from "../../../state/experiments/selectors";
+import { getExperimentsCount, getFilteredExperiments } from "../../../state/experiments/selectors";
 import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from "../../../state/dates/selectors";
 
 describe("getExperimentsCount test", () => {
@@ -13,17 +13,19 @@ describe("getExperimentsCount test", () => {
   });
 });
 
-describe("getFilteredExperimentsByDate tests", () => {
+describe("getFilteredExperiments tests", () => {
   const experiment1 = {
     start_date: Date.parse("2018-08-22"),
     end_date: Date.parse("2019-01-20"),
-    name: "test experiment name 1"
+    name: "test experiment name 1",
+    type: "pref"
   };
 
   const experiment2 = {
     start_date: Date.parse("2017-08-22"),
     end_date: Date.parse("2019-01-20"),
-    name: "test experiment name 2"
+    name: "test experiment name 2",
+    type: "addon"
   }
 
   const mockedExperiments = {
@@ -42,7 +44,7 @@ describe("getFilteredExperimentsByDate tests", () => {
       }
     });
 
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1]));
   });
 
   it("should return an empty List, where none of the items in experiments fall between the startDate and endDate ranges", () => {
@@ -53,7 +55,7 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: "2019-12-31"
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return all experiments with start date after startDate", () => {
@@ -64,7 +66,7 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: null
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1]));
   });
 
   it("should return an empty List because all experiment start dates are before chosen startDates", () => {
@@ -75,7 +77,7 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: null
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return empty List because experiment start date is null", () => {
@@ -92,7 +94,7 @@ describe("getFilteredExperimentsByDate tests", () => {
         startDate: "2018-07-22"
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return an empty List because all experiment end dates are after chosen endDates", () => {
@@ -103,7 +105,7 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: "2016-07-22"
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([]));
   });
 
   it("should return empty List because experiment end date is null", () => {
@@ -120,6 +122,39 @@ describe("getFilteredExperimentsByDate tests", () => {
         endDate: "2018-07-22"
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([]));
+  });
+
+  it("should return experiment that has type `pref`", () => {
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
+      type: {
+        selectedType: "pref"
+      }
+    });
+
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1]));
+  });
+
+  it("should return experiment that has type `addon`", () => {
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
+      type: {
+        selectedType: "addon"
+      }
+    });
+
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment2]));
+  });
+
+  it("should return experiments of all types", () => {
+    const mockedState = fromJS({
+      experiments: mockedExperiments, 
+      type: {
+        selectedType: null
+      }
+    });
+
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
   });
 });

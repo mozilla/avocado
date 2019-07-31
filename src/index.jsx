@@ -3,10 +3,12 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ExperimentList from "./components/experiments/ExperimentList";
 import ConnectedDatePicker from "./components/dates/DatePicker";
+import ConnectedTypeSelector from "./components/type/TypeSelector";
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
 import dates from "./state/dates/reducer";
+import type from "./state/type/reducer";
 import thunk from "redux-thunk";
 import { Map } from "immutable";
 import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
@@ -29,7 +31,7 @@ const crashReporter = () => next => action => {
 };
 
 const store = createStore(
-  combineReducers({ experiments, dates }),
+  combineReducers({ experiments, dates, type }),
   new Map(),
   applyMiddleware(logger, crashReporter, thunk)
 );
@@ -41,6 +43,7 @@ const App = () => (
     <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
     <h4>End Date: </h4>
     <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
+    <ConnectedTypeSelector />
   </React.Fragment>
 );
 
