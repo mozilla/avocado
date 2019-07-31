@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { fromJS } from "immutable";
 import thunk from "redux-thunk";
 import { STATUS_SELECTED } from "../../../state/action-types";
+import { STATUS_DRAFT } from "../../../constants";
 
 describe("StatusSelector component", () => {
   it("should render the StatusSelector component", () => {
@@ -36,9 +37,9 @@ describe("StatusSelector component", () => {
     const component = mount(<StatusSelector {...props} />)
 
     const statusSelectTag = component.find("select[id='status']");
-    statusSelectTag.simulate('change', { target: { value: "draft" } });
+    statusSelectTag.simulate('change', { target: { value: STATUS_DRAFT } });
 
-    expect(statusReceived).toEqual("draft");
+    expect(statusReceived).toEqual(STATUS_DRAFT);
   });
 
   it("should mount and check that correct action for setting status was dispatched", () => {
@@ -60,11 +61,11 @@ describe("StatusSelector component", () => {
       </Provider>
     );
     const statusSelectTag = component.find("select[id='status']");
-    statusSelectTag.simulate('change', {target: { value: "draft" } });
+    statusSelectTag.simulate('change', {target: { value: STATUS_DRAFT } });
 
     const expectedAction = {
       type: STATUS_SELECTED,
-      data: "draft"
+      data: STATUS_DRAFT
     }
     
     expect(store.getActions()).toEqual([expectedAction]);

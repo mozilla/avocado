@@ -2,6 +2,7 @@ import { fromJS } from "immutable";
 import { getExperimentsCount, getFilteredExperiments } from "../../../state/experiments/selectors";
 import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from "../../../state/dates/selectors";
 import { getExperimentsCount, getFilteredExperimentsByDate } from "../../../state/experiments/selectors";
+import { STATUS_DRAFT, STATUS_LIVE } from "../../../constants";
 
 describe("getExperimentsCount test", () => {
   it("should get experiment count", () => {
@@ -20,7 +21,7 @@ describe("getFilteredExperiments tests", () => {
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 1",
     type: "pref",
-    status: "Draft"
+    status: STATUS_DRAFT
   };
 
   const experiment2 = {
@@ -28,7 +29,7 @@ describe("getFilteredExperiments tests", () => {
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 2",
     type: "addon",
-    status: "Live"
+    status: STATUS_LIVE
   }
 
   const mockedExperiments = {
@@ -165,7 +166,7 @@ describe("getFilteredExperiments tests", () => {
     let mockedState = fromJS({
       experiments: mockedExperiments,
       status: {
-        selectedStatus: "Draft"
+        selectedStatus: STATUS_DRAFT
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1, experiment2]));
@@ -175,7 +176,7 @@ describe("getFilteredExperiments tests", () => {
     let mockedState = fromJS({
       experiments: mockedExperiments,
       status: {
-        selectedStatus: "Live"
+        selectedStatus: STATUS_LIVE
       }
     });
     expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment2]));
