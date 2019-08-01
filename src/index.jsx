@@ -47,7 +47,6 @@ const App = () => (
     <h4>End Date: </h4>
     <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
     <ConnectedTypeSelector />
-    <ConnectedStatusSelector />
   </React.Fragment>
 );
 

@@ -1,7 +1,5 @@
-import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from '../dates/selectors';
-import { getType } from '../type/selectors';
-import { getStatus } from '../status/selectors'
 import { getStartDatepickerTimestamp, getEndDatepickerTimestamp} from '../dates/selectors';
+import { getType } from '../type/selectors'
 import { getStatus } from '../status/selectors';
 import { STATUSES } from '../../constants';
 
@@ -15,6 +13,7 @@ export const getFilteredExperiments = (state) => {
   const experiments = getExperiments(state); 
   const selectedStartTimestamp = getStartDatepickerTimestamp(state);
   const selectedEndTimestamp = getEndDatepickerTimestamp(state);
+  const selectedType = getType(state);
   const selectedStatusPriority = STATUSES[getStatus(state)];
 
   return experiments.filter(experiment => {
@@ -37,6 +36,9 @@ export const getFilteredExperiments = (state) => {
       } else if (!endDate) {
         return false;
       }
+    }
+    if (selectedType && (type !== selectedType)) {
+      return false;
     }
     if (selectedStatusPriority && (selectedStatusPriority > experimentStatusPriority)) {
       return false;

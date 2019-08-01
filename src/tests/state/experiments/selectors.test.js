@@ -1,7 +1,5 @@
 import { fromJS } from "immutable";
 import { getExperimentsCount, getFilteredExperiments } from "../../../state/experiments/selectors";
-import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from "../../../state/dates/selectors";
-import { getExperimentsCount, getFilteredExperimentsByDate } from "../../../state/experiments/selectors";
 import { STATUS_DRAFT, STATUS_LIVE } from "../../../constants";
 
 describe("getExperimentsCount test", () => {
@@ -169,7 +167,7 @@ describe("getFilteredExperiments tests", () => {
         selectedStatus: STATUS_DRAFT
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
   });
 
   it("should filter status, and return experiments that have reached at least live", () => {
@@ -179,7 +177,7 @@ describe("getFilteredExperiments tests", () => {
         selectedStatus: STATUS_LIVE
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment2]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment2]));
   });
 
   it("should have filter status set to `All`, and return all experiments", () => {
@@ -189,6 +187,6 @@ describe("getFilteredExperiments tests", () => {
         selectedStatus: null
       }
     });
-    expect(getFilteredExperimentsByDate(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
   });
 });
