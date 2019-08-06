@@ -49,8 +49,14 @@ export const getFilteredExperiments = (state) => {
   });
 }
 
+
+/**
+ * Return an object that has each state as the key, and how many days it spent in each state as the key.
+ * @param {} state 
+ */
 export const getStatusDates = (state) => {
   const experiments = getExperiments(state);
+  const  numExperiments = getExperimentsCount(state);
 
   return experiments.map(experiment => {
     let statuses = {
@@ -65,18 +71,23 @@ export const getStatusDates = (state) => {
 
     const changes = experiment.get("changes");
     let oldDate = null;
+    let oldStatus = null;
 
-    changes.forEach(changelog => {
-      const oldStatus = changelog.get("old_status");
-      // const newStatus = changelog.get("new_status");
+    changes.forEach((changelog, index) => {
       const changedDate = changelog.get("changed_on");
-     
-      // update
+      const newStatus = changelog.get("new_status");
+  
       if (oldDate && oldStatus) {
         statuses[oldStatus] += getNumberDays(oldDate, changedDate)
       }
 
-      oldDate = changedDate
+      // for last index, add how many days it has been in that stage
+      if (index === (numExperiments - 1)) {
+        statuses[newStatus] += getNumberDays(changedDate, new Date())
+      }
+
+      oldDate = changedDate;
+      oldStatus = newStatus;
     });
 
     console.log(statuses);
