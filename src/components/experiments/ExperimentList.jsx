@@ -5,7 +5,8 @@ import { fetchExperiments } from "../../state/experiments/actions";
 import {
   getExperimentsCount,
   getFilteredExperiments,
-  getStatusDates
+  getStatusDates,
+  getMedianArray
 } from "../../state/experiments/selectors";
 import { getStartDate, getEndDate } from "../../state/dates/selectors";
 import PropTypes from "prop-types";
@@ -35,7 +36,7 @@ export class ExperimentList extends React.Component {
           {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
           {this.renderTitle()}
         </h1>
-        {/* <h6>{this.props.changeLog}</h6> */}
+        <h6>{this.props.median}</h6>
         <ExperimentTable {...this.props} />
       </div>
     );
@@ -54,7 +55,8 @@ const mapStateToProps = state => ({
   filteredExperiments: getFilteredExperiments(state),
   startDate: getStartDate(state),
   endDate: getEndDate(state),
-  changeLog: getStatusDates(state)
+  changeLog: getStatusDates(state),
+  median: getMedianArray(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -90,7 +90,7 @@ export const getStatusDates = (state) => {
       oldStatus = newStatus;
     });
 
-    console.log(statuses);
+    // console.log(statuses);
     return statuses;
   })
 }
@@ -105,3 +105,44 @@ const getNumberDays = (oldDate, newDate) => {
 
   return days;
 }
+
+/**
+ * Return an array with the median values of number of days an experiment has spent at each stage.
+ * 
+ * Ex: [0, 5, 2, 5, 2, 1, 6]
+ */
+export const getMedianArray = (state) => {
+  const finalArray = [];
+
+  let statuses = {
+    [STATUS_REJECTED]: [],
+    [STATUS_DRAFT]: [],
+    [STATUS_REVIEW]: [],
+    [STATUS_SHIP]: [],
+    [STATUS_ACCEPTED]: [],
+    [STATUS_LIVE]: [],
+    [STATUS_COMPLETE]: []
+  }
+  const statusDates = getStatusDates(state);
+  
+
+  // build up array of arrays with values
+  statusDates.forEach(statusObject => {
+    Object.keys(statusObject).forEach(key => {
+      statuses[key].push(statusObject[key])
+    });
+  });
+
+  Object.keys(statuses).forEach(key => {
+    finalArray.push(getMedian(statuses[key]))
+  });
+
+  console.log(finalArray)
+  return finalArray;
+}
+
+const getMedian = arr => {
+  const mid = Math.floor(arr.length / 2),
+    nums = [...arr].sort((a, b) => a - b);
+  return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+};
