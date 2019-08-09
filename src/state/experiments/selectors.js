@@ -2,6 +2,7 @@ import { getStartDatepickerTimestamp, getEndDatepickerTimestamp} from '../dates/
 import { getType } from '../type/selectors'
 import { getStatus } from '../status/selectors';
 import { STATUSES } from '../../constants';
+import { STATUS_REJECTED, STATUS_DRAFT, STATUS_REVIEW, STATUS_SHIP, STATUS_ACCEPTED, STATUS_LIVE, STATUS_COMPLETE } from '../../constants';
 
 const getExperiments = state =>
   state.getIn(["experiments", "items"]);
@@ -46,4 +47,53 @@ export const getFilteredExperiments = (state) => {
 
     return true;
   });
+}
+
+/**
+ * Return an object with objects that state as the key, and how many days it spent in each state as the value.
+ * @param {} state 
+ */
+export const getStatusDates = (state) => {
+  const experiments = getFilteredExperiments(state);
+
+  return experiments.map(experiment => {
+    let statuses = {
+      [STATUS_REJECTED]: 0,
+      [STATUS_DRAFT]: 0,
+      [STATUS_REVIEW]: 0,
+      [STATUS_SHIP]: 0,
+      [STATUS_ACCEPTED]: 0,
+      [STATUS_LIVE]: 0,
+      [STATUS_COMPLETE]: 0
+    }
+
+    const changes = experiment.getIn(["changes"]);
+    let oldDate = null;
+    let oldStatus = null;
+
+    changes.forEach((changelog) => {
+      const changedDate = changelog.get("changed_on");
+      const newStatus = changelog.get("new_status");
+  
+      if (oldDate && oldStatus) {
+        statuses[oldStatus] += getNumberDaysBetweenDates(oldDate, changedDate)
+      }
+
+      oldDate = changedDate;
+      oldStatus = newStatus;
+    });
+
+    console.log("statuses: ", statuses);
+    return statuses;
+  })
+}
+
+const getNumberDaysBetweenDates = (oldDate, newDate) => {
+  const date1 = new Date(oldDate);
+  const date2 = new Date(newDate);
+
+  const res = Math.abs(date1 - date2) / 1000;
+  const days = Math.floor(res / 86400);
+
+  return days;
 }
