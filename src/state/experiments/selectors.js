@@ -55,8 +55,8 @@ export const getFilteredExperiments = (state) => {
  * @param {} state 
  */
 export const getStatusDates = (state) => {
-  const experiments = getExperiments(state);
-  const  numExperiments = getExperimentsCount(state);
+  const experiments = getFilteredExperiments(state);
+  const  numExperiments = experiments.length;
 
   return experiments.map(experiment => {
     let statuses = {
@@ -69,7 +69,7 @@ export const getStatusDates = (state) => {
       [STATUS_COMPLETE]: 0
     }
 
-    const changes = experiment.get("changes");
+    const changes = experiment.getIn(["changes"]);
     let oldDate = null;
     let oldStatus = null;
 
@@ -90,7 +90,7 @@ export const getStatusDates = (state) => {
       oldStatus = newStatus;
     });
 
-    // console.log(statuses);
+    console.log(statuses);
     return statuses;
   })
 }
@@ -134,7 +134,7 @@ export const getMedianArray = (state) => {
   });
 
   Object.keys(statuses).forEach(key => {
-    finalArray.push(getMedian(statuses[key]))
+    finalArray.push(getAverage(statuses[key]))
   });
 
   console.log(finalArray)
@@ -146,3 +146,9 @@ const getMedian = arr => {
     nums = [...arr].sort((a, b) => a - b);
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
 };
+
+const getAverage = arr => {
+  const sum = arr.reduce((a,b) => a + b, 0)
+
+  return sum/arr.length;
+}
