@@ -1,6 +1,6 @@
 import { fromJS } from "immutable";
 import { getExperimentsCount, getFilteredExperiments } from "../../../state/experiments/selectors";
-import { getStartDatepickerTimestamp, getEndDatepickerTimestamp } from "../../../state/dates/selectors";
+import { STATUS_DRAFT, STATUS_LIVE } from "../../../constants";
 
 describe("getExperimentsCount test", () => {
   it("should get experiment count", () => {
@@ -18,14 +18,16 @@ describe("getFilteredExperiments tests", () => {
     start_date: Date.parse("2018-08-22"),
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 1",
-    type: "pref"
+    type: "pref",
+    status: STATUS_DRAFT
   };
 
   const experiment2 = {
     start_date: Date.parse("2017-08-22"),
     end_date: Date.parse("2019-01-20"),
     name: "test experiment name 2",
-    type: "addon"
+    type: "addon",
+    status: STATUS_LIVE
   }
 
   const mockedExperiments = {
@@ -155,6 +157,36 @@ describe("getFilteredExperiments tests", () => {
       }
     });
 
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+  });
+
+  it("should filter status, and return experiments that have reached at least draft", () => {
+    let mockedState = fromJS({
+      experiments: mockedExperiments,
+      status: {
+        selectedStatus: STATUS_DRAFT
+      }
+    });
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
+  });
+
+  it("should filter status, and return experiments that have reached at least live", () => {
+    let mockedState = fromJS({
+      experiments: mockedExperiments,
+      status: {
+        selectedStatus: STATUS_LIVE
+      }
+    });
+    expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment2]));
+  });
+
+  it("should have filter status set to `All`, and return all experiments", () => {
+    let mockedState = fromJS({
+      experiments: mockedExperiments,
+      status: {
+        selectedStatus: null
+      }
+    });
     expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
   });
 });
