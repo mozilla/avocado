@@ -2,7 +2,7 @@ import { getStartDatepickerTimestamp, getEndDatepickerTimestamp} from '../dates/
 import { getType } from '../type/selectors'
 import { getStatus } from '../status/selectors';
 import { STATUSES } from '../../constants';
-import { STATUS_REJECTED, STATUS_DRAFT, STATUS_REVIEW, STATUS_SHIP, STATUS_ACCEPTED, STATUS_LIVE, STATUS_COMPLETE } from '../../constants';
+import { STATUS_REJECTED, STATUS_DRAFT, STATUS_REVIEW, STATUS_SHIP, STATUS_ACCEPTED, STATUS_LIVE, STATUS_COMPLETE, SECONDS_IN_A_DAY} from '../../constants';
 
 const getExperiments = state =>
   state.getIn(["experiments", "items"]);
@@ -50,24 +50,54 @@ export const getFilteredExperiments = (state) => {
 }
 
 /**
- * Return an object with objects that state as the key, and how many days it spent in each state as the value.
- * @param {} state 
+ * Return an array with the median values of number of days an experiment has spent at each stage.
+ * The returned array will be used as input for the graph.
+ * 
+ *  - Example: [0, 5, 2, 5, 2, 1, 6]
  */
-export const getStatusDates = (state) => {
+export const getMedianArray = (state) => {
+  const medianArray = [];
+  const statuses = {
+    [STATUS_REJECTED]: [],
+    [STATUS_DRAFT]: [],
+    [STATUS_REVIEW]: [],
+    [STATUS_SHIP]: [],
+    [STATUS_ACCEPTED]: [],
+    [STATUS_LIVE]: [],
+    [STATUS_COMPLETE]: []
+  }
+  
+  const statusDates = getStatusDates(state);
+  statusDates.forEach(statusObject => {
+    Object.keys(statusObject).forEach(key => {
+      statuses[key].push(statusObject[key])
+    });
+  });
+
+  Object.keys(statuses).forEach(key => {
+    medianArray.push(getMedian(statuses[key]))
+  });
+
+  return medianArray;
+}
+
+/**
+ * Return a list of dictionary objects. 
+ * 
+ * Each dictionary corresponds to an experiment, and how many days it spent at each status (there are 7)
+ *  - key:  status
+ *  - value: how many days it remained in the status
+ *  - example: Object { Rejected: 0, Draft: 12, Review: 1, Ship: 10, Accepted: 0, Live: 0, Complete: 0 }
+ * 
+ * This is used as a helper function for getMedianArray.
+ */
+const getStatusDates = (state) => {
   const experiments = getFilteredExperiments(state);
 
   return experiments.map(experiment => {
-    let statuses = {
-      [STATUS_REJECTED]: 0,
-      [STATUS_DRAFT]: 0,
-      [STATUS_REVIEW]: 0,
-      [STATUS_SHIP]: 0,
-      [STATUS_ACCEPTED]: 0,
-      [STATUS_LIVE]: 0,
-      [STATUS_COMPLETE]: 0
-    }
+    const statuses = initializeStatusArray(0);
 
-    const changes = experiment.getIn(["changes"]);
+    const changes = experiment.get("changes");
     let oldDate = null;
     let oldStatus = null;
 
@@ -83,17 +113,37 @@ export const getStatusDates = (state) => {
       oldStatus = newStatus;
     });
 
-    console.log("statuses: ", statuses);
     return statuses;
   })
 }
 
+/**
+ * Return the number of days between given two dates.
+ */
 const getNumberDaysBetweenDates = (oldDate, newDate) => {
   const date1 = new Date(oldDate);
   const date2 = new Date(newDate);
 
-  const res = Math.abs(date1 - date2) / 1000;
-  const days = Math.floor(res / 86400);
+  const seconds = Math.abs(date1 - date2) / 1000; // convert from milliseconds to seconds
+  const days = Math.floor(seconds / SECONDS_IN_A_DAY);
 
   return days;
+}
+
+const getMedian = arr => {
+  const mid = Math.floor(arr.length / 2),
+    nums = [...arr].sort((a, b) => a - b);
+  return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+};
+
+const initializeStatusArray = (initialValue) => {
+  return {
+    [STATUS_REJECTED]: initialValue,
+    [STATUS_DRAFT]: initialValue,
+    [STATUS_REVIEW]: initialValue,
+    [STATUS_SHIP]: initialValue,
+    [STATUS_ACCEPTED]: initialValue,
+    [STATUS_LIVE]: initialValue,
+    [STATUS_COMPLETE]: initialValue
+  }
 }
