@@ -67,7 +67,7 @@ export const getMedianArray = (state) => {
     [STATUS_COMPLETE]: []
   }
   
-  const statusDates = getStatusDates(state);
+  const statusDates = getExperimentStatusToDaysData(state);
   statusDates.forEach(statusObject => {
     Object.keys(statusObject).forEach(key => {
       statuses[key].push(statusObject[key])
@@ -91,11 +91,11 @@ export const getMedianArray = (state) => {
  * 
  * This is used as a helper function for getMedianArray.
  */
-const getStatusDates = (state) => {
+const getExperimentStatusToDaysData = (state) => {
   const experiments = getFilteredExperiments(state);
 
   return experiments.map(experiment => {
-    const statuses = initializeStatusArray(0);
+    const statusesToNumDays = initializeStatusArray(0);
 
     const changes = experiment.get("changes");
     let oldDate = null;
@@ -106,14 +106,15 @@ const getStatusDates = (state) => {
       const newStatus = changelog.get("new_status");
   
       if (oldDate && oldStatus) {
-        statuses[oldStatus] += getNumberDaysBetweenDates(oldDate, changedDate)
+        statusesToNumDays[oldStatus] += getNumberDaysBetweenDates(oldDate, changedDate)
       }
 
       oldDate = changedDate;
       oldStatus = newStatus;
     });
 
-    return statuses;
+    console.log(statusesToNumDays);
+    return statusesToNumDays;
   })
 }
 
