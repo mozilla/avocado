@@ -2,7 +2,7 @@ import { getStartDatepickerTimestamp, getEndDatepickerTimestamp} from '../dates/
 import { getType } from '../type/selectors'
 import { getStatus } from '../status/selectors';
 import { STATUSES } from '../../constants';
-import { STATUS_REJECTED, STATUS_DRAFT, STATUS_REVIEW, STATUS_SHIP, STATUS_ACCEPTED, STATUS_LIVE, STATUS_COMPLETE, SECONDS_IN_A_DAY} from '../../constants';
+import { STATUS_DRAFT, STATUS_REVIEW, STATUS_SHIP, STATUS_ACCEPTED, STATUS_LIVE, STATUS_COMPLETE, SECONDS_IN_A_DAY} from '../../constants';
 
 const getExperiments = state =>
   state.getIn(["experiments", "items"]);
@@ -58,7 +58,6 @@ export const getFilteredExperiments = (state) => {
 export const getMedianArray = (state) => {
   const medianArray = [];
   const statuses = {
-    [STATUS_REJECTED]: [],
     [STATUS_DRAFT]: [],
     [STATUS_REVIEW]: [],
     [STATUS_SHIP]: [],
@@ -66,11 +65,13 @@ export const getMedianArray = (state) => {
     [STATUS_LIVE]: [],
     [STATUS_COMPLETE]: []
   }
-  
   const statusDates = getExperimentStatusToDaysData(state);
+
   statusDates.forEach(statusObject => {
     Object.keys(statusObject).forEach(key => {
-      statuses[key].push(statusObject[key])
+      if (statusObject[key]) {
+        statuses[key].push(statusObject[key])
+      }
     });
   });
 
@@ -84,18 +85,18 @@ export const getMedianArray = (state) => {
 /**
  * Return a list of dictionary objects. 
  * 
- * Each dictionary corresponds to an experiment, and how many days it spent at each status (there are 7)
+ * Each dictionary corresponds to an experiment, and how many days it spent at each status (there are 6)
  *  - key:  status
  *  - value: how many days it remained in the status
- *  - example: Object { Rejected: 0, Draft: 12, Review: 1, Ship: 10, Accepted: 0, Live: 0, Complete: 0 }
+ *  - example: Object { Draft: 12, Review: 1, Ship: 10, Accepted: null, Live: null, Complete: null }
  * 
  * This is used as a helper function for getMedianArray.
  */
-const getExperimentStatusToDaysData = (state) => {
+export const getExperimentStatusToDaysData = (state) => {
   const experiments = getFilteredExperiments(state);
 
   return experiments.map(experiment => {
-    const statusesToNumDays = initializeStatusArray(0);
+    const statusesToNumDays = initializeStatusArray(null);
 
     const changes = experiment.get("changes");
     let oldDate = null;
@@ -106,7 +107,11 @@ const getExperimentStatusToDaysData = (state) => {
       const newStatus = changelog.get("new_status");
   
       if (oldDate && oldStatus) {
-        statusesToNumDays[oldStatus] += getNumberDaysBetweenDates(oldDate, changedDate)
+        if (statusesToNumDays[oldStatus] == null) {
+          statusesToNumDays[oldStatus] = getNumberDaysBetweenDates(oldDate, changedDate)
+        } else {
+          statusesToNumDays[oldStatus] += getNumberDaysBetweenDates(oldDate, changedDate)
+        }
       }
 
       oldDate = changedDate;
@@ -121,25 +126,30 @@ const getExperimentStatusToDaysData = (state) => {
 /**
  * Return the number of days between given two dates.
  */
-const getNumberDaysBetweenDates = (oldDate, newDate) => {
+export const getNumberDaysBetweenDates = (oldDate, newDate) => {
   const date1 = new Date(oldDate);
   const date2 = new Date(newDate);
 
   const seconds = Math.abs(date1 - date2) / 1000; // convert from milliseconds to seconds
-  const days = Math.floor(seconds / SECONDS_IN_A_DAY);
+  const days = seconds / SECONDS_IN_A_DAY;
 
   return days;
 }
 
-const getMedian = arr => {
-  const mid = Math.floor(arr.length / 2),
+export const getMedian = arr => {
+  if (arr.length == 0) {
+    return 0;
+  } else if (arr.length == 1) {
+    return arr[0];
+  } else {
+    const mid = Math.ceil(arr.length / 2),
     nums = [...arr].sort((a, b) => a - b);
-  return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+    return arr.length % 2 !== 0 ? nums[mid - 1] : (nums[mid - 1] + nums[mid]) / 2;
+  }
 };
 
 const initializeStatusArray = (initialValue) => {
   return {
-    [STATUS_REJECTED]: initialValue,
     [STATUS_DRAFT]: initialValue,
     [STATUS_REVIEW]: initialValue,
     [STATUS_SHIP]: initialValue,

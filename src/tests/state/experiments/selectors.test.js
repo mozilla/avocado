@@ -1,5 +1,5 @@
 import { fromJS } from "immutable";
-import { getExperimentsCount, getFilteredExperiments } from "../../../state/experiments/selectors";
+import { getExperimentsCount, getFilteredExperiments, getMedian, getNumberDaysBetweenDates } from "../../../state/experiments/selectors";
 import { STATUS_DRAFT, STATUS_LIVE } from "../../../constants";
 
 describe("getExperimentsCount test", () => {
@@ -189,4 +189,39 @@ describe("getFilteredExperiments tests", () => {
     });
     expect(getFilteredExperiments(mockedState)).toEqual(fromJS([experiment1, experiment2]));
   });
+});
+
+describe("Median Array helper functions", () => {
+  it("should call getMedian() on an array with odd number of elements that are unsorted", () => {
+    expect(getMedian([10, 2, 4, 1, 8])).toEqual(4);
+  });
+
+  it("should call getMedian() on an array with even number of elements that are unsorted", () => {
+    expect(getMedian([10, 8, 1, 7])).toEqual(7.5);
+  });
+
+  it("should call getMedian() on an empty array", () => {
+    expect(getMedian([])).toEqual(0);
+  });
+
+  it("should call getMedian() on an array with one element", () => {
+    expect(getMedian([1])).toEqual(1);
+  });
+
+  // getNumberDaysBetweenDates
+  it("should call getNumberDaysBetweenDates() ", () => {
+    const date1 = "2019-03-20T19:40:24.413929Z";
+    const date2 = "2019-03-25T19:40:24.413929Z"
+    
+    expect(getNumberDaysBetweenDates(date2, date1)).toEqual(5);
+  });
+
+  it("should call getNumberDaysBetweenDates() where 0 number of days are between them", () => {
+    const date1 = "2019-03-20T01:00:00.000000Z";
+    const date2 = "2019-03-20T13:00:00.000000Z";
+    
+    expect(getNumberDaysBetweenDates(date2, date1)).toEqual(0.50);
+  });
+
+
 });
