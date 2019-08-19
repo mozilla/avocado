@@ -1,6 +1,7 @@
-import { fromJS } from "immutable";
-import { getExperimentsCount, getFilteredExperiments, getMedian, getNumberDaysBetweenDates } from "../../../state/experiments/selectors";
-import { STATUS_DRAFT, STATUS_LIVE } from "../../../constants";
+import { fromJS, List } from "immutable";
+import { getExperimentsCount, getFilteredExperiments, getMedian, 
+  getNumberDaysBetweenDates, getExperimentStatusToDaysData, getMedianArray } from "../../../state/experiments/selectors";
+import { STATUS_DRAFT, STATUS_LIVE, STATUS_REVIEW } from "../../../constants";
 
 describe("getExperimentsCount test", () => {
   it("should get experiment count", () => {
@@ -36,7 +37,6 @@ describe("getFilteredExperiments tests", () => {
       experiment2
     ]
   }
-  
   it("should return an immutable List of filtered experiments, where 1 experiment falls between startDate and endDate range", () => {
     const mockedState = fromJS({
       experiments: mockedExperiments, 
@@ -222,6 +222,173 @@ describe("Median Array helper functions", () => {
     
     expect(getNumberDaysBetweenDates(date2, date1)).toEqual(0.50);
   });
+});
 
+describe("getExperimentStatusToDaysData() and getMedianArray() Tests", () => {
+  const experiment1 = {
+    changes: [
+      { changed_on: "2019-05-08T01:00:00.000000Z",
+        new_status: "Draft", 
+        old_status: null
+      }
+    ]
+  }
+  
+  const experiment2 = {
+    changes: [
+      { changed_on: "2019-05-07T01:00:00.000000Z",
+      new_status: "Draft", 
+      old_status: null
+      },
+      { changed_on: "2019-05-08T01:00:00.000000Z",
+      new_status: "Review", 
+      old_status: "Draft"
+      }
+    ]
+  };
+  
+  const experiment3 = {
+    changes: [
+      { changed_on: "2019-05-07T01:00:00.000000Z",
+      new_status: "Draft", 
+      old_status: null
+      },
+      { changed_on: "2019-05-10T01:00:00.000000Z",
+      new_status: "Review", 
+      old_status: "Draft"
+      },
+      { changed_on: "2019-05-15T01:00:00.000000Z",
+      new_status: "Draft", 
+      old_status: "Review"
+      },
+      { changed_on: "2019-05-20T01:00:00.000000Z",
+      new_status: "Review", 
+      old_status: "Draft"
+      }
+    ]
+  }
 
+  it("should test `getExperimentStatusToDaysData` on a changelog that made it past Draft", () => {
+    const mockedState = fromJS({
+      experiments: {
+        items: [experiment2]
+      }
+    });
+
+    const expectedOutput = List(
+      [
+        {
+          "Accepted": null,
+          "Complete": null,
+          "Draft": 1,
+          "Live": null,
+          "Review": null,
+          "Ship": null,
+        }
+      ]
+    );
+
+    expect(getExperimentStatusToDaysData(mockedState)).toEqual(expectedOutput);
+  });
+
+  it("should test `getExperimentStatusToDaysData` when old_status is null, and new_status has a date", () => {
+    const mockedState = fromJS({
+      experiments: {
+        items: [experiment1]
+      }
+    });
+
+    const expectedOutput = List(
+      [
+        {
+          "Accepted": null,
+          "Complete": null,
+          "Draft": null,
+          "Live": null,
+          "Review": null,
+          "Ship": null,
+        }
+      ]
+    );
+
+    expect(getExperimentStatusToDaysData(mockedState)).toEqual(expectedOutput);
+  });
+
+  it("should test `getExperimentStatusToDaysData` when experiment changelog goes back and forth between one status and the next.", () => {
+    const mockedState = fromJS({
+      experiments: {
+        items: [experiment3]
+      }
+    });
+
+    const expectedOutput = List(
+      [
+        {
+          "Accepted": null,
+          "Complete": null,
+          "Draft": 8,
+          "Live": null,
+          "Review": 5,
+          "Ship": null,
+        }
+      ]
+    );
+
+    expect(getExperimentStatusToDaysData(mockedState)).toEqual(expectedOutput);
+  });
+
+  it("should test `getExperimentStatusToDaysData` when there are multiple experiments.", () => {
+    const mockedState = fromJS({
+      experiments: {
+        items: [experiment1, experiment3]
+      }
+    });
+
+    const expectedOutput =
+      List([
+        {
+          "Accepted": null,
+          "Complete": null,
+          "Draft": null,
+          "Live": null,
+          "Review": null,
+          "Ship": null,
+        },
+        {
+          "Accepted": null,
+          "Complete": null,
+          "Draft": 8,
+          "Live": null,
+          "Review": 5,
+          "Ship": null,
+        }
+      ]
+      );
+
+    expect(getExperimentStatusToDaysData(mockedState)).toEqual(expectedOutput);
+  });
+
+  it("should test `getMedianArray` when there is one experiment", () => {
+    const mockedState = fromJS({
+      experiments: {
+        items: [experiment3]
+      }
+    });
+
+    const expectedOutput = [8, 5, 0, 0, 0, 0];
+
+    expect(getMedianArray(mockedState)).toEqual(expectedOutput);
+  });
+
+  it("should test `getMedianArray` when there are multiple experiments", () => {
+    const mockedState = fromJS({
+      experiments: {
+        items: [experiment2, experiment3]
+      }
+    });
+
+    const expectedOutput = [4.5, 5, 0, 0, 0, 0];
+
+    expect(getMedianArray(mockedState)).toEqual(expectedOutput);
+  });
 });
