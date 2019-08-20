@@ -22,7 +22,6 @@ export class DatePicker extends React.Component {
           <h4 className="card-title">{this.props.title}</h4>
           <input className="form-control" type="date" onChange={this.onChange} value={this.props.value} />
         </div>
-        
       </div>
     );
   }
