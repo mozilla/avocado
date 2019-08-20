@@ -41,34 +41,36 @@ const store = createStore(
 );
 
 const App = () => (
-  <div>
+  <React.Fragment>
     < Avocado />
-    <div className="flex-container">
-    <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
-    <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
-    <ConnectedStatusSelector />
-    <ConnectedTypeSelector />
-      {/* <div className="col-xl-3 col-md-6 mb-4">
-      <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
+        </div>
+        <div className="col">
+          <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
+        </div>
+        <div className="col">
+          <ConnectedStatusSelector />
+        </div>
+        <div className="col">
+          <ConnectedTypeSelector />
+        </div>
       </div>
-      <div className="col-xl-3 col-md-6 mb-4">
-      <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
-      </div>
-      <div className="col-xl-3 col-md-6 mb-4">
-      <ConnectedStatusSelector />
-      </div>
-      <div className="col-xl-3 col-md-6 mb-4">
-      <ConnectedTypeSelector />
-      </div> */}
-    </div>
-    <ConnectedExperimentGraph />
-    <div className="experiment-table">
-      
-      <ExperimentList />
-    </div>
-  </div>
 
-
+      <div className="row">
+        <div className="col">
+          <ConnectedExperimentGraph />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <ExperimentList />
+        </div>
+      </div>
+    </div>
+  </React.Fragment>
 );
 
 ReactDOM.render(
