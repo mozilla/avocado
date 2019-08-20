@@ -45,7 +45,7 @@ const App = () => (
   <React.Fragment>
     < Header />
     <div className="container mt-4">
-      <div className="row">
+      <div className="row mb-4">
         <div className="col">
           <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} title={"Start Date"} colour={"red"} />
         </div>
