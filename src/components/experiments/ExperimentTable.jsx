@@ -11,7 +11,11 @@ export class ExperimentTable extends React.Component {
     };
 
     return (
-      <table>
+      <div className="card shadow mb-4">
+
+      <div className="card-body">
+      <div id="dataTable_wrapper" className="dataTables_wrapper dt-bootstrap4 col-sm-12">
+      <table className="table table-bordered dataTable">
         <thead>
           <tr>
             <th>Name</th>
@@ -24,7 +28,7 @@ export class ExperimentTable extends React.Component {
           {this.props.filteredExperiments.map(function(item, key) {
             return (
               <tr key={key}>
-                <td>{item.get("name")}</td>
+                <td><a href={item.get("experiment_url")}>{item.get("name")}</a></td>
                 <td>{formatDate(item.get("start_date"))}</td>
                 <td>{formatDate(item.get("end_date"))}</td>
                 <td>{item.get("status")}</td>
@@ -33,6 +37,9 @@ export class ExperimentTable extends React.Component {
           })}
         </tbody>
       </table>
+      </div>
+      </div>
+      </div>
     );
   }
 }

@@ -16,16 +16,18 @@ export class StatusSelector extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4>Status:</h4>
-        <select id="status" onChange={this.onChange} value={this.props.value}>
-          <option value="">All</option>
-          {Object.keys(STATUSES).map(status => (
-            <option value={status} key={status}>
-              {status}
-            </option>
-          ))}
-        </select>
+      <div className="card border-left-success shadow h-100 py-2">
+        <div className="card-body row no-gutters align-items-center">
+          <h4 className="text-xs font-weight-bold text-primary text-uppercase mb-1">Status:</h4>
+          <select class="select-css" id="status" onChange={this.onChange} value={this.props.value}>
+            <option value="">All</option>
+            {Object.keys(STATUSES).map(status => (
+              <option value={status} key={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     );
   }

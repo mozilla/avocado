@@ -2,6 +2,7 @@ import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ExperimentList from "./components/experiments/ExperimentList";
+import { Avocado } from "./components/header/avocado";
 import ConnectedDatePicker from "./components/dates/DatePicker";
 import ConnectedTypeSelector from "./components/type/TypeSelector";
 import ConnectedStatusSelector from "./components/status/StatusSelector";
@@ -40,16 +41,34 @@ const store = createStore(
 );
 
 const App = () => (
-  <React.Fragment>
-    <h4>Start Date: </h4>
+  <div>
+    < Avocado />
+    <div className="flex-container">
     <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
-    <h4>End Date: </h4>
     <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
     <ConnectedStatusSelector />
     <ConnectedTypeSelector />
+      {/* <div className="col-xl-3 col-md-6 mb-4">
+      <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
+      </div>
+      <div className="col-xl-3 col-md-6 mb-4">
+      <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
+      </div>
+      <div className="col-xl-3 col-md-6 mb-4">
+      <ConnectedStatusSelector />
+      </div>
+      <div className="col-xl-3 col-md-6 mb-4">
+      <ConnectedTypeSelector />
+      </div> */}
+    </div>
     <ConnectedExperimentGraph />
-    <ExperimentList />
-  </React.Fragment>
+    <div className="experiment-table">
+      
+      <ExperimentList />
+    </div>
+  </div>
+
+
 );
 
 ReactDOM.render(
