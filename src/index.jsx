@@ -2,7 +2,7 @@ import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ExperimentList from "./components/experiments/ExperimentList";
-import { Avocado } from "./components/header/avocado";
+import { Header } from "./components/header/Header";
 import ConnectedDatePicker from "./components/dates/DatePicker";
 import ConnectedTypeSelector from "./components/type/TypeSelector";
 import ConnectedStatusSelector from "./components/status/StatusSelector";
@@ -42,7 +42,7 @@ const store = createStore(
 
 const App = () => (
   <React.Fragment>
-    < Avocado />
+    < Header />
     <div className="container">
       <div className="row">
         <div className="col">
