@@ -44,13 +44,13 @@ const store = createStore(
 const App = () => (
   <React.Fragment>
     < Header />
-    <div className="container">
+    <div className="container mt-4">
       <div className="row">
         <div className="col">
-          <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
+          <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} title={"Start Date"} colour={"red"} />
         </div>
         <div className="col">
-          <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
+          <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} title={"End Date"} colour={"green"} />
         </div>
         <div className="col">
           <ConnectedStatusSelector />

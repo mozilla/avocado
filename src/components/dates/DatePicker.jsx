@@ -17,13 +17,13 @@ export class DatePicker extends React.Component {
 
   render() {
     return (
-      <div className="card border-left-warning shadow ">
-        <div className="card-body row no-gutters align-items-center">
-      <div className="dropdown">
-        <input type="date" onChange={this.onChange} value={this.props.value} />
+      <div className={`card shadow border-left-${this.props.colour}`}>
+        <div className="card-body ">
+          <h5 className="card-title">{this.props.title}</h5>
+          <input className="form-control" type="date" onChange={this.onChange} value={this.props.value} />
         </div>
-        </div>
-        </div>
+        
+      </div>
     );
   }
 }
@@ -32,7 +32,9 @@ DatePicker.propTypes = {
   value: PropTypes.string,
   setDate: PropTypes.func,
   dispatch: PropTypes.func,
-  onChangeAction: PropTypes.string
+  onChangeAction: PropTypes.string,
+  title: PropTypes.string,
+  colour: PropTypes.string
 };
 
 const mapStateToProps = state => ({
