@@ -5,7 +5,6 @@ import { getMedianArray } from "../../state/experiments/selectors";
 import createPlotlyComponent from 'react-plotlyjs';
 import Plotly from 'plotly.js/dist/plotly-cartesian';
 const PlotlyComponent = createPlotlyComponent(Plotly);
-import '../../assets/header.css';
 
 export class ExperimentGraph extends React.Component {
   render() {
