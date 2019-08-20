@@ -15,9 +15,11 @@ export class TypeSelector extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <h4>Type:</h4>
+      <div className="card border-left-primary shadow">
+        <div className="card-body row no-gutters align-items-center">
+        <h4 className="text-xs font-weight-bold text-primary text-uppercase mb-1">Type:</h4>
         <select
+          class="select-css"
           id="typeSelector"
           onChange={this.onChange}
           value={this.props.value}
@@ -26,7 +28,9 @@ export class TypeSelector extends React.Component {
           <option value="addon">Add-on</option>
           <option value="pref">Pref</option>
         </select>
-      </React.Fragment>
+     </div>
+     </div>
+     
     );
   }
 }
