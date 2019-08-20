@@ -16,6 +16,7 @@ import status from "./state/status/reducer";
 import thunk from "redux-thunk";
 import { Map } from "immutable";
 import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
+import './assets/avocado.scss';
 
 const logger = () => next => action => {
   /* eslint-disable no-console */
