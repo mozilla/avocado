@@ -23,7 +23,8 @@
     "test": "jest --coverage",
     "lint": "eslint src/**/*.js src/**/*.jsx",
     "lint-fix": "eslint --fix src/**/*.js src/**/*.jsx",
-    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "bundle": "parcel build src/index.html --public-url ."
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
