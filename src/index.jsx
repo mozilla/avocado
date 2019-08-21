@@ -5,6 +5,7 @@ import ExperimentList from "./components/experiments/ExperimentList";
 import ConnectedDatePicker from "./components/dates/DatePicker";
 import ConnectedTypeSelector from "./components/type/TypeSelector";
 import ConnectedStatusSelector from "./components/status/StatusSelector";
+import ConnectedExperimentGraph from "./components/experiments/ExperimentGraph";
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux-immutable";
 import experiments from "./state/experiments/reducer";
@@ -40,13 +41,14 @@ const store = createStore(
 
 const App = () => (
   <React.Fragment>
-    <ConnectedStatusSelector />
-    <ExperimentList />
     <h4>Start Date: </h4>
     <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
     <h4>End Date: </h4>
     <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
+    <ConnectedStatusSelector />
     <ConnectedTypeSelector />
+    <ConnectedExperimentGraph />
+    <ExperimentList />
   </React.Fragment>
 );
 

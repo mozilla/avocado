@@ -15,3 +15,5 @@ export const STATUSES = {
     [STATUS_LIVE]: 5,
     [STATUS_COMPLETE]: 6
 }
+
+export const SECONDS_IN_A_DAY = 86400; // 24 x 60 x 60
