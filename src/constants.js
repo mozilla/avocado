@@ -7,7 +7,6 @@ export const STATUS_LIVE = "Live";
 export const STATUS_COMPLETE = "Complete";
 
 export const STATUSES = {
-    [STATUS_REJECTED]: 0,
     [STATUS_DRAFT]: 1,
     [STATUS_REVIEW]: 2,
     [STATUS_SHIP]: 3,

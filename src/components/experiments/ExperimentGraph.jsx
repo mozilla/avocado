@@ -16,7 +16,8 @@ export class ExperimentGraph extends React.Component {
         y: this.props.median,
         marker: {
           color: 'rgb(16, 32, 77)'
-        }
+        },
+        name: 'line graph'
       },
       {
         type: 'bar',      // all "bar" chart attributes: #bar
