@@ -29,10 +29,10 @@ export class ExperimentGraph extends React.Component {
     let layout = {
       title: '',
       xaxis: {
-        title: 'stage'
+        title: 'Phase'
       },
       yaxis: {
-        title: 'median number of days spent in stage',
+        title: 'Median number of days spent in phase',
       }
     };
     let config = {
