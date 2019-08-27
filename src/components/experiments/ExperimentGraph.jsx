@@ -49,7 +49,7 @@ export class ExperimentGraph extends React.Component {
 }
 
 ExperimentGraph.propTypes = {
-  median: PropTypes.instanceOf(List)
+  median: PropTypes.instanceOf(Array)
 };
 
 const mapStateToProps = state => ({
