@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { getMedianArray } from "../../state/experiments/selectors";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
-import { List } from "immutable";
 
 export class ExperimentGraph extends React.Component {
   render() {
