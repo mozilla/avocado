@@ -1,4 +1,4 @@
-import { STATUS_SELECTED } from "../action-types";
+import { STATUS_SELECTED } from "/state/action-types";
 
 export const setStatus = value => (
   dispatch => {

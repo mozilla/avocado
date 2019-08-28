@@ -1,4 +1,4 @@
-import { TYPE_SELECTED } from "../action-types";
+import { TYPE_SELECTED } from "/state/action-types";
 
 export const setType = value => (
   dispatch => {

@@ -3,7 +3,7 @@ import Adapter from "enzyme-adapter-react-16";
 import { shallow, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 import { fromJS } from "immutable";
-import { ExperimentTable } from "../../../components/experiments/ExperimentTable";
+import { ExperimentTable } from "/components/experiments/ExperimentTable";
 
 describe("ExperimentTable component", () => {
     it("should render an experiment table with a header row defining the head of the columns, as well as table rows that display correct column information", () => {

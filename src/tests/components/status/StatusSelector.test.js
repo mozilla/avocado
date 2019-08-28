@@ -4,13 +4,13 @@ import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 import ConnectedStatusSelector, {
     StatusSelector
-} from "../../../components/status/StatusSelector";
+} from "/components/status/StatusSelector";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { fromJS } from "immutable";
 import thunk from "redux-thunk";
-import { STATUS_SELECTED } from "../../../state/action-types";
-import { STATUS_DRAFT } from "../../../constants";
+import { STATUS_SELECTED } from "/state/action-types";
+import { STATUS_DRAFT } from "/constants";
 
 describe("StatusSelector component", () => {
   it("should render the StatusSelector component", () => {
