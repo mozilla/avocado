@@ -10,15 +10,6 @@ export class ExperimentGraph extends React.Component {
     const PlotlyComponent = createPlotlyComponent(Plotly);
     let data = [
       {
-        type: "scatter", // all "scatter" attributes: https://plot.ly/javascript/reference/#scatter
-        x: ["Draft", "Review", "Ship", "Accepted", "Live", "Complete"],
-        y: this.props.median,
-        marker: {
-          color: "rgb(16, 32, 77)"
-        },
-        name: "line graph"
-      },
-      {
         type: "bar", // all "bar" chart attributes: #bar
         x: ["Draft", "Review", "Ship", "Accepted", "Live", "Complete"],
         y: this.props.median,
@@ -26,12 +17,12 @@ export class ExperimentGraph extends React.Component {
       }
     ];
     let layout = {
-      title: "",
+      title: "Median number of days spent in phase",
       xaxis: {
         title: "Phase"
       },
       yaxis: {
-        title: "Median number of days spent in phase"
+        title: "Median Days"
       }
     };
     let config = {

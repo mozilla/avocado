@@ -10,6 +10,13 @@ import configureStore from "redux-mock-store";
 
 describe("ExperimentGraph component", () => {
     it("should render an experiment graph component", () => {
+        const container = mount(
+            <ExperimentGraph />
+        );
+        expect(container.exists()).toBe(true);
+    });
+
+    it("should render an experiment graph component and check that it receives correct median array", () => {
         const medianVals = Array([1, 2, 3, 4, 5, 0]);
 
         const container = mount(
@@ -17,7 +24,7 @@ describe("ExperimentGraph component", () => {
               median={medianVals}
             />
         );
-        expect(container.exists()).toBe(true);
+
         expect(container.props().median).toBe(medianVals);
     });
 
