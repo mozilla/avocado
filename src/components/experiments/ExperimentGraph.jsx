@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getMedianArray } from "../../state/experiments/selectors";
+import { getMedianArray } from "/state/experiments/selectors";
 
 export class ExperimentGraph extends React.Component {
   render() {

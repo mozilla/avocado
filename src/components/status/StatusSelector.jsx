@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setStatus } from "../../state/status/actions";
+import { setStatus } from "/state/status/actions";
 import PropTypes from "prop-types";
-import { STATUSES } from "./../../constants.js";
+import { STATUSES } from "/constants.js";
 
 export class StatusSelector extends React.Component {
   constructor(props) {

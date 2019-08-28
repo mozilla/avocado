@@ -13,6 +13,9 @@
         "lines": 100,
         "statements": -10
       }
+    },
+    "moduleNameMapper": {
+      "^/(.*)$": "<rootDir>/src/$1"
     }
   },
   "version": "1.0.0",
