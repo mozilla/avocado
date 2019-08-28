@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import { getStartDate, getEndDate,
   getStartDatepickerTimestamp, getEndDatepickerTimestamp 
-} from "../../../state/dates/selectors";
+} from "/state/dates/selectors";
 
 describe("Date selectors", () => {
   it("should get start date", () => {

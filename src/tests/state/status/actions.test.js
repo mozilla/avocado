@@ -1,6 +1,6 @@
-import { setStatus } from "../../../state/status/actions";
-import { STATUS_SELECTED } from "../../../state/action-types";
-import { STATUS_DRAFT } from "../../../constants";
+import { setStatus } from "/state/status/actions";
+import { STATUS_SELECTED } from "/state/action-types";
+import { STATUS_DRAFT } from "/constants";
 
 describe("testing status actions", () => {
   it("should set status to selected status", done => {

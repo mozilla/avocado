@@ -1,6 +1,6 @@
-import { selectedStatus } from "../../../state/status/reducer";
-import { STATUS_SELECTED } from "../../../state/action-types";
-import { STATUS_DRAFT } from "../../../constants";
+import { selectedStatus } from "/state/status/reducer";
+import { STATUS_SELECTED } from "/state/action-types";
+import { STATUS_DRAFT } from "/constants";
 
 describe("Status Reducer", () => {
   it("should test default action for status selection", () => {

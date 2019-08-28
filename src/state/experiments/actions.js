@@ -1,4 +1,4 @@
-import { EXPERIMENT_DATA_RECEIVED } from "../action-types";
+import { EXPERIMENT_DATA_RECEIVED } from "/state/action-types";
 
 export const fetchExperiments = () => dispatch => {
   fetch("https://stage.experimenter.nonprod.dataops.mozgcp.net/api/v1/experiments/")

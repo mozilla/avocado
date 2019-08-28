@@ -1,6 +1,6 @@
 import { fromJS } from "immutable";
-import { getStatus } from "../../../state/status/selectors";
-import { STATUS_DRAFT } from "../../../constants";
+import { getStatus } from "/state/status/selectors";
+import { STATUS_DRAFT } from "/constants";
 
 describe("Status selectors", () => {
 

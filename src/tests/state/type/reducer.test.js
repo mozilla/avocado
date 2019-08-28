@@ -1,5 +1,5 @@
-import { selectedType } from "../../../state/type/reducer";
-import { TYPE_SELECTED } from "../../../state/action-types";
+import { selectedType } from "/state/type/reducer";
+import { TYPE_SELECTED } from "/state/action-types";
 
 describe("Type Reducer", () => {
   it("should test default action for type selection", () => {
