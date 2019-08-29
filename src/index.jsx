@@ -16,6 +16,8 @@ import status from "./state/status/reducer";
 import thunk from "redux-thunk";
 import { Map } from "immutable";
 import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
+import './assets/avocado.scss';
+import Avocado from './components/etc/Avocado';
 
 const logger = () => next => action => {
   /* eslint-disable no-console */
@@ -42,7 +44,9 @@ const store = createStore(
 
 const App = () => (
   <React.Fragment>
-    < Header />
+    <Avocado /><Avocado dorito={true} />
+    <Avocado cape={true}/>
+    <Header />
     <div className="container mt-4">
       <div className="row mb-4">
         <div className="col">
