@@ -1,5 +1,5 @@
-import { setType } from "/state/type/actions";
-import { TYPE_SELECTED } from "/state/action-types";
+import { setType } from "avocado/state/type/actions";
+import { TYPE_SELECTED } from "avocado/state/action-types";
 
 describe("test actions for type", () => {
     it("should set the type selected to pref", done => {

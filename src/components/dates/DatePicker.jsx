@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setDate } from "/state/dates/actions";
+import { setDate } from "avocado/state/dates/actions";
 
 import PropTypes from "prop-types";
 

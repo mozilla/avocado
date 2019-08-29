@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ExperimentTable } from "./ExperimentTable";
-import { fetchExperiments } from "/state/experiments/actions";
+import { ExperimentTable } from "avocado/components/experiments/ExperimentTable";
+import { fetchExperiments } from "avocado/state/experiments/actions";
 import {
   getExperimentsCount,
   getFilteredExperiments
-} from "/state/experiments/selectors";
-import { getStartDate, getEndDate } from "/state/dates/selectors";
+} from "avocado/state/experiments/selectors";
+import { getStartDate, getEndDate } from "avocado/state/dates/selectors";
 import PropTypes from "prop-types";
 import { List } from "immutable";
 

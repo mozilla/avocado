@@ -4,12 +4,12 @@ import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 import ConnectedTypeSelector, {
     TypeSelector
-} from "/components/type/TypeSelector";
+} from "avocado/components/type/TypeSelector";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { Map } from "immutable";
 import thunk from "redux-thunk";
-import { TYPE_SELECTED } from "/state/action-types";
+import { TYPE_SELECTED } from "avocado/state/action-types";
 
 describe("TypeSelector component", () => {
   it("should render the TypeSelector component", () => {

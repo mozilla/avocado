@@ -1,5 +1,5 @@
 import { fromJS } from "immutable";
-import { getType } from "/state/type/selectors";
+import { getType } from "avocado/state/type/selectors";
 
 describe("Type selectors", () => {
     it("should get selected type to be pref", () => {

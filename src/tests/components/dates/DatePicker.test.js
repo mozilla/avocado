@@ -4,12 +4,12 @@ import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 import ConnectedDatePicker, {
     DatePicker
-} from "/components/dates/DatePicker";
+} from "avocado/components/dates/DatePicker";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { Map } from "immutable";
 import thunk from "redux-thunk";
-import { START_DATE_SELECTED } from "/state/action-types";
+import { START_DATE_SELECTED } from "avocado/state/action-types";
 
 describe("DatePicker component", () => {
   it("should render the datepicker component", () => {
