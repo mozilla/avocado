@@ -6,9 +6,7 @@ Maintainer: Jenny Zhang
 
 ## Installation
 
-1. Install npm 
-
-        [here](https://www.npmjs.com/get-npm)
+1. Install [npm](https://www.npmjs.com/get-npm)
 
 1. Clone the repo
 
@@ -22,9 +20,7 @@ Maintainer: Jenny Zhang
 
         npm start
         
-1. Open in browser
-
-        Navigate to [localhost:1234]
+1. Open in browser, navigate to [localhost:1234](localhost:1234)
 
 1. Run tests
 
@@ -44,4 +40,4 @@ Maintainer: Jenny Zhang
 </p>
 
 
-Pst! Hit <up><up><down><down><left><right><left><right><b><a> on your keyboard for a surprise
+Pst! Hit up up down down left right left right b a on your keyboard for a surprise.
