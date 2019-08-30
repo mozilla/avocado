@@ -29,4 +29,6 @@ Maintainer: Jenny Zhang
         npm run-script lint-fix
 
 
-![alt text]()
+<p align="center">
+  <img src="https://github.com/mozilla/avocado/blob/2/src/assets/demo.gif" width="350" title="demo">
+</p>
