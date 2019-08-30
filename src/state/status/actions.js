@@ -1,4 +1,4 @@
-import { STATUS_SELECTED } from "../action-types";
+import { STATUS_SELECTED } from "avocado/state/action-types";
 
 export const setStatus = value => (
   dispatch => {

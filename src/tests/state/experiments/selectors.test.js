@@ -1,7 +1,7 @@
 import { fromJS, List } from "immutable";
 import { getExperimentsCount, getFilteredExperiments, getMedian, 
-  getNumberDaysBetweenDates, getExperimentStatusToDaysData, getMedianArray } from "../../../state/experiments/selectors";
-import { STATUS_DRAFT, STATUS_LIVE, STATUS_REVIEW } from "../../../constants";
+  getNumberDaysBetweenDates, getExperimentStatusToDaysData, getMedianArray } from "avocado/state/experiments/selectors";
+import { STATUS_DRAFT, STATUS_LIVE, STATUS_REVIEW } from "avocado/constants";
 
 describe("getExperimentsCount test", () => {
   it("should get experiment count", () => {
