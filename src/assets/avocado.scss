@@ -1,0 +1,37 @@
+@import "~bootstrap/scss/bootstrap";
+
+#header {
+    background-color: #356211;
+    color: white;
+}
+
+#header h1 {
+    font-size: 4rem;
+}
+
+.border-left-red {
+    border-left: 5px solid #AA471F;
+}
+
+.border-left-green {
+    border-left: 5px solid #356211;
+}
+
+.border-left-yellow {
+    border-left: 5px solid #F2E880;
+}
+
+.border-left-orange {
+    border-left: 5px solid #C15C37;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(./img/select.png) right / 20px no-repeat #fff !important;
+    background-image: url(./img/select.png) right / 20px no-repeat #fff !important;
+    padding-right: 20px;
+}
+
+@import "./etc.scss";

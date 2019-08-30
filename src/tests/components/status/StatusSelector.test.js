@@ -35,9 +35,8 @@ describe("StatusSelector component", () => {
     }
 
     const component = mount(<StatusSelector {...props} />)
-
-    const statusSelectTag = component.find("select[id='status']");
-    statusSelectTag.simulate('change', { target: { value: STATUS_DRAFT } });
+    const selectTag = component.find("#status");
+    selectTag.simulate('change', { target: { value: STATUS_DRAFT } });
 
     expect(statusReceived).toEqual(STATUS_DRAFT);
   });

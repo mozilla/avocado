@@ -2,6 +2,7 @@ import React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import ExperimentList from "./components/experiments/ExperimentList";
+import { Header } from "./components/header/Header";
 import ConnectedDatePicker from "./components/dates/DatePicker";
 import ConnectedTypeSelector from "./components/type/TypeSelector";
 import ConnectedStatusSelector from "./components/status/StatusSelector";
@@ -12,9 +13,11 @@ import experiments from "./state/experiments/reducer";
 import dates from "./state/dates/reducer";
 import type from "./state/type/reducer";
 import status from "./state/status/reducer";
+import Avocado from "./components/etc/Avocado";
 import thunk from "redux-thunk";
 import { Map } from "immutable";
 import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
+import "./assets/avocado.scss";
 
 const logger = () => next => action => {
   /* eslint-disable no-console */
@@ -41,14 +44,58 @@ const store = createStore(
 
 const App = () => (
   <React.Fragment>
-    <h4>Start Date: </h4>
-    <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} />
-    <h4>End Date: </h4>
-    <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} />
-    <ConnectedStatusSelector />
-    <ConnectedTypeSelector />
-    <ConnectedExperimentGraph />
-    <ExperimentList />
+    <Header />
+    <div className="container mt-4" id="konami">
+      <div className="row mb-4">
+        <div className="col">
+          <Avocado />
+        </div>
+        <div className="col">
+          <Avocado dorito={true} />
+        </div>
+        <div className="col">
+          <Avocado cape={true} />
+        </div>
+        <div className="col">
+          <Avocado dorito={true} />
+        </div>
+      </div>
+    </div>
+    <div className="container mt-4">
+      <div className="row mb-4">
+        <div className="col">
+          <ConnectedDatePicker
+            onChangeAction={START_DATE_SELECTED}
+            title={"Start Date"}
+            colour={"red"}
+          />
+        </div>
+        <div className="col">
+          <ConnectedDatePicker
+            onChangeAction={END_DATE_SELECTED}
+            title={"End Date"}
+            colour={"green"}
+          />
+        </div>
+        <div className="col">
+          <ConnectedStatusSelector />
+        </div>
+        <div className="col">
+          <ConnectedTypeSelector />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <ConnectedExperimentGraph />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <ExperimentList />
+        </div>
+      </div>
+    </div>
   </React.Fragment>
 );
 

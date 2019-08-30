@@ -18,7 +18,7 @@ describe("Experiment list component", () => {
         filteredExperiments={fromJS([{start_date: "some date"}])}
       />
     );
-    const text = wrapper.find("h1").text();
+    const text = wrapper.find("h2").text();
     expect(text).toEqual("1 / 113 experiments");
   });
 
@@ -67,7 +67,7 @@ describe("Test renderTitle() method", () => {
         endDate={"2019-01-20"}
       />
     );
-    const text = wrapper.find("h1").text();
+    const text = wrapper.find("h2").text();
     expect(text).toEqual("1 / 113 experiments after 2018-08-22 before 2019-01-20");
   });
 
@@ -80,7 +80,7 @@ describe("Test renderTitle() method", () => {
         endDate={""}
       />
     );
-    const text = wrapper.find("h1").text();
+    const text = wrapper.find("h2").text();
     expect(text).toEqual("1 / 113 experiments after 2018-08-22");
   });
 
@@ -93,7 +93,7 @@ describe("Test renderTitle() method", () => {
         endDate={"2018-08-22"}
       />
     );
-    const text = wrapper.find("h1").text();
+    const text = wrapper.find("h2").text();
     expect(text).toEqual("1 / 113 experiments before 2018-08-22");
   });
 });
