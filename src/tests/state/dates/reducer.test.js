@@ -1,5 +1,5 @@
-import { startDate, endDate } from "../../../state/dates/reducer";
-import { START_DATE_SELECTED, END_DATE_SELECTED } from "../../../state/action-types";
+import { startDate, endDate } from "avocado/state/dates/reducer";
+import { START_DATE_SELECTED, END_DATE_SELECTED } from "avocado/state/action-types";
 
 describe("Date Reducer", () => {
   it("should test default action for start date selection", () => {

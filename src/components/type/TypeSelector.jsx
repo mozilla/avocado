@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setType } from "../../state/type/actions";
+import { setType } from "avocado/state/type/actions";
 import PropTypes from "prop-types";
 
 export class TypeSelector extends React.Component {

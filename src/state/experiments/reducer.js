@@ -1,6 +1,6 @@
 import { fromJS, List } from "immutable";
 import { combineReducers } from "redux-immutable";
-import { EXPERIMENT_DATA_RECEIVED } from "../action-types";
+import { EXPERIMENT_DATA_RECEIVED } from "avocado/state/action-types";
 
 const items = (state = List(), action) => {
   switch (action.type) {

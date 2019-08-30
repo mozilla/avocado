@@ -1,5 +1,5 @@
-import { setDate } from "../../../state/dates/actions";
-import { START_DATE_SELECTED, END_DATE_SELECTED } from "../../../state/action-types";
+import { setDate } from "avocado/state/dates/actions";
+import { START_DATE_SELECTED, END_DATE_SELECTED } from "avocado/state/action-types";
 
 describe("testing actions", () => {
   it("should set the start date", done => {

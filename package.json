@@ -13,6 +13,9 @@
         "lines": 100,
         "statements": -10
       }
+    },
+    "moduleNameMapper": {
+      "^avocado/(.*)$": "<rootDir>/src/$1"
     }
   },
   "version": "1.0.0",
@@ -62,5 +65,8 @@
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "v8": "^0.1.0"
+  },
+  "alias": {
+    "avocado": "./src"
   }
 }

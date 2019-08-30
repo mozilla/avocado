@@ -1,5 +1,5 @@
 import { combineReducers } from "redux-immutable";
-import { STATUS_SELECTED } from "../action-types";
+import { STATUS_SELECTED } from "avocado/state/action-types";
 
 export const selectedStatus = (state = null, action) => {
     switch (action.type) {
