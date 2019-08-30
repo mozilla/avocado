@@ -27,9 +27,8 @@ export class TypeSelector extends React.Component {
             <option value="addon">Add-on</option>
             <option value="pref">Pref</option>
           </select>
+        </div>
       </div>
-     </div>
-     
     );
   }
 }

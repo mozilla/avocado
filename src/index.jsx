@@ -13,11 +13,11 @@ import experiments from "./state/experiments/reducer";
 import dates from "./state/dates/reducer";
 import type from "./state/type/reducer";
 import status from "./state/status/reducer";
+import Avocado from "./components/etc/Avocado";
 import thunk from "redux-thunk";
 import { Map } from "immutable";
 import { START_DATE_SELECTED, END_DATE_SELECTED } from "./state/action-types";
-import './assets/avocado.scss';
-import Avocado from './components/etc/Avocado';
+import "./assets/avocado.scss";
 
 const logger = () => next => action => {
   /* eslint-disable no-console */
@@ -44,16 +44,35 @@ const store = createStore(
 
 const App = () => (
   <React.Fragment>
-    <Avocado /><Avocado dorito={true} />
-    <Avocado cape={true}/>
     <Header />
+    <div className="container mt-4" id="konami">
+      <div className="row mb-4">
+        <div className="col">
+          <Avocado />
+        </div>
+        <div className="col">
+          <Avocado dorito={true} />
+        </div>
+        <div className="col">
+          <Avocado cape={true} />
+        </div>
+      </div>
+    </div>
     <div className="container mt-4">
       <div className="row mb-4">
         <div className="col">
-          <ConnectedDatePicker onChangeAction={START_DATE_SELECTED} title={"Start Date"} colour={"red"} />
+          <ConnectedDatePicker
+            onChangeAction={START_DATE_SELECTED}
+            title={"Start Date"}
+            colour={"red"}
+          />
         </div>
         <div className="col">
-          <ConnectedDatePicker onChangeAction={END_DATE_SELECTED} title={"End Date"} colour={"green"} />
+          <ConnectedDatePicker
+            onChangeAction={END_DATE_SELECTED}
+            title={"End Date"}
+            colour={"green"}
+          />
         </div>
         <div className="col">
           <ConnectedStatusSelector />

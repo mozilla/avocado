@@ -7,51 +7,6 @@
   padding:20px;
 }
 
-h1, h2, .ghost {
-  font-family:Montserrat;
-  font-weight:600;  
-  margin:0;
-}
-  
-h1 {
-  font-weight:800;
-  letter-spacing:-2px;
-  font-size:64px;
-  color:#444;
-}
-
-h2 {
-  font-size:24px;
-  color:#222;
-}
-
-.ghost {
-  font-weight:400;
-  font-size:15px;
-  color:#000;
-  display:inline-block;
-  margin:8px 2px;
-  padding:8px;
-  border:1px solid #2a670c;
-  text-decoration:none;
-}
-
-a.ghost:hover {
-  transition:all .5s linear;
-  background:rgba(50,50,50, .2);
-  border-color:#000;
-  color:#000;
-}
-
-body {
-  background:#e4ff93;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  animation:ambient 4s ease alternate infinite;
-}
-
 @keyframes ambient {
   0% { background:#e4ff93 }
   50% { background:#888 }

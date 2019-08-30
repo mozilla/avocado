@@ -9,7 +9,6 @@ export class DatePicker extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
   }
-  
 
   onChange(event) {
     this.props.dispatch(setDate(event.target.value, this.props.onChangeAction));
@@ -20,7 +19,12 @@ export class DatePicker extends React.Component {
       <div className={`card shadow border-left-${this.props.colour}`}>
         <div className="card-body ">
           <h4 className="card-title">{this.props.title}</h4>
-          <input className="form-control" type="date" onChange={this.onChange} value={this.props.value} />
+          <input
+            className="form-control"
+            type="date"
+            onChange={this.onChange}
+            value={this.props.value}
+          />
         </div>
       </div>
     );

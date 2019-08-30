@@ -31,10 +31,10 @@ export class ExperimentList extends React.Component {
     return (
       <div>
         <div className="card bg-warning text-white shadow">
-        <h2 className="card-body">
-          {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
-          {this.renderTitle()}
-        </h2>
+          <h2 className="card-body">
+            {this.props.filteredExperiments.size} / {this.props.experimentCount}{" "}
+            {this.renderTitle()}
+          </h2>
         </div>
         <ExperimentTable {...this.props} />
       </div>

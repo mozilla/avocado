@@ -19,9 +19,9 @@ export class StatusSelector extends React.Component {
       <div className="card shadow border-left-yellow">
         <div className="card-body">
           <h4 className="card-title">Status</h4>
-          <select 
-            className="form-control" 
-            onChange={this.onChange} 
+          <select
+            className="form-control"
+            onChange={this.onChange}
             value={this.props.value}
           >
             <option value="">All</option>
