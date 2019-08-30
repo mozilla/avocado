@@ -56,6 +56,9 @@ const App = () => (
         <div className="col">
           <Avocado cape={true} />
         </div>
+        <div className="col">
+          <Avocado dorito={true} />
+        </div>
       </div>
     </div>
     <div className="container mt-4">

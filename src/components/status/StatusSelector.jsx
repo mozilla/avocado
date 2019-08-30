@@ -23,6 +23,7 @@ export class StatusSelector extends React.Component {
             className="form-control"
             onChange={this.onChange}
             value={this.props.value}
+            id="select"
           >
             <option value="">All</option>
             {Object.keys(STATUSES).map(status => (
@@ -36,6 +37,7 @@ export class StatusSelector extends React.Component {
     );
   }
 }
+
 
 StatusSelector.propTypes = {
   value: PropTypes.string,
