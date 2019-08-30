@@ -34,7 +34,7 @@ describe("TypeSelector component", () => {
 
     const component = mount(<TypeSelector {...props} />)
 
-    const typeSelector = component.find("select[id='typeSelector']");
+    const typeSelector = component.find("#typeSelector");
     typeSelector.simulate('change', {target: { value: "pref" }});
 
     expect(typeReceived).toEqual("pref");
@@ -54,7 +54,7 @@ describe("TypeSelector component", () => {
         <ConnectedTypeSelector />
       </Provider>
     );
-    const selector = component.find("select[id='typeSelector']");
+    const selector = component.find("#typeSelector");
     selector.simulate('change', { target: { value: 'addon' } })
 
     const expectedAction = {

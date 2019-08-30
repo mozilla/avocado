@@ -22,6 +22,7 @@ export class TypeSelector extends React.Component {
             className="form-control"
             onChange={this.onChange}
             value={this.props.value}
+            id="typeSelector"
           >
             <option value="">All</option>
             <option value="addon">Add-on</option>
