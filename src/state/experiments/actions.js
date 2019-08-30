@@ -1,7 +1,16 @@
 import { EXPERIMENT_DATA_RECEIVED } from "avocado/state/action-types";
+import * as packageJson from "package.json";
+const process = require('process');
+
+let experimenterUrl = packageJson.experimenter[process.env.EXPERIMENTER_TARGET];
+
+/* istanbul ignore next */
+if (!experimenterUrl) {
+  experimenterUrl = packageJson.experimenter.dev;
+}
 
 export const fetchExperiments = () => dispatch => {
-  fetch("https://experimenter.services.mozilla.com/api/v1/experiments/")
+  fetch(experimenterUrl)
     .then(res => res.json())
     .then(data => {
       dispatch({
