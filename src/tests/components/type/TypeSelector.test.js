@@ -3,7 +3,7 @@ import Adapter from "enzyme-adapter-react-16";
 import { shallow, mount, configure } from "enzyme";
 configure({ adapter: new Adapter() });
 import ConnectedTypeSelector, {
-    TypeSelector
+  TypeSelector,
 } from "avocado/components/type/TypeSelector";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
@@ -13,31 +13,37 @@ import { TYPE_SELECTED } from "avocado/state/action-types";
 
 describe("TypeSelector component", () => {
   it("should render the TypeSelector component", () => {
-    const wrapper = shallow(
-      <TypeSelector />
-    );
+    const wrapper = shallow(<TypeSelector />);
     expect(wrapper.exists()).toBe(true);
   });
 
-  it("should call setType with value when selecting to filter by type", () => {
+  it("should call setType with value when selecting to filter by types", () => {
     let typeReceived = null;
 
-    const dispatch = actionCreator => {
+    const dispatch = (actionCreator) => {
       actionCreator((action) => {
         typeReceived = action.data;
-      })
-    }
-    
-    const props = { 
-      dispatch
-    }
+      });
+    };
 
-    const component = mount(<TypeSelector {...props} />)
+    const props = {
+      dispatch,
+    };
+
+    const component = mount(<TypeSelector {...props} />);
 
     const typeSelector = component.find("#typeSelector");
-    typeSelector.simulate('change', {target: { value: "pref" }});
+    typeSelector
+      .find("Select")
+      .instance()
+      .selectOption({ value: "pref", label: "Pref" });
 
-    expect(typeReceived).toEqual("pref");
+    typeSelector
+      .find("Select")
+      .instance()
+      .selectOption({ value: "addon", label: "Addon" });
+
+    expect(typeReceived).toEqual(["pref", "addon"]);
   });
 
   it("should mount and check that correct action for setting type was dispatched", () => {
@@ -45,8 +51,8 @@ describe("TypeSelector component", () => {
     const store = mockStore(
       Map({
         type: Map({
-          selectedType: null
-        })
+          selectedType: null,
+        }),
       })
     );
     let component = mount(
@@ -54,14 +60,17 @@ describe("TypeSelector component", () => {
         <ConnectedTypeSelector />
       </Provider>
     );
-    const selector = component.find("#typeSelector");
-    selector.simulate('change', { target: { value: 'addon' } })
+    const typeSelector = component.find("#typeSelector");
+    typeSelector
+      .find("Select")
+      .instance()
+      .selectOption({ value: "addon", label: "Addon" });
 
     const expectedAction = {
       type: TYPE_SELECTED,
-      data: "addon"
-    }
-    
+      data: ["addon"],
+    };
+
     expect(store.getActions()).toEqual([expectedAction]);
   });
 });
