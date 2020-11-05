@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Select from "react-select";
 import { setType } from "avocado/state/type/actions";
 import PropTypes from "prop-types";
 
@@ -9,25 +10,34 @@ export class TypeSelector extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(event) {
-    this.props.dispatch(setType(event.target.value));
+  onChange(options) {
+    let types;
+    if (options) {
+      types = options.map((option) => {
+        return option.value;
+      });
+    }
+    this.props.dispatch(setType(types));
   }
 
   render() {
+    const typeOptions = [
+      { value: "addon", label: "Add-on" },
+      { value: "pref", label: "Pref" },
+      { value: "message", label: "Message Router" },
+      { value: "rollout", label: "Rollout" },
+    ];
     return (
       <div className="card shadow border-left-orange">
         <div className="card-body">
           <h4 className="card-title">Type</h4>
-          <select
-            className="form-control"
+          <Select
             onChange={this.onChange}
-            value={this.props.value}
+            options={typeOptions}
             id="typeSelector"
-          >
-            <option value="">All</option>
-            <option value="addon">Add-on</option>
-            <option value="pref">Pref</option>
-          </select>
+            isMulti
+            isClearable
+          />
         </div>
       </div>
     );
@@ -37,11 +47,11 @@ export class TypeSelector extends React.Component {
 TypeSelector.propTypes = {
   value: PropTypes.string,
   setType: PropTypes.func,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-  value: state.value
+const mapStateToProps = (state) => ({
+  value: state.value,
 });
 
 export default connect(mapStateToProps)(TypeSelector);

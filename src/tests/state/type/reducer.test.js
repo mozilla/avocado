@@ -3,7 +3,7 @@ import { TYPE_SELECTED } from "avocado/state/action-types";
 
 describe("Type Reducer", () => {
   it("should test default action for type selection", () => {
-    let expectedState = null;
+    let expectedState = [];
     expect(selectedType(undefined, {})).toEqual(expectedState);
   });
 
@@ -11,7 +11,7 @@ describe("Type Reducer", () => {
     let expectedState = "addon";
     let reducerResult = selectedType(undefined, {
       type: TYPE_SELECTED,
-      data: "addon"
+      data: "addon",
     });
     expect(reducerResult).toEqual(expectedState);
   });
@@ -20,16 +20,7 @@ describe("Type Reducer", () => {
     let expectedState = "pref";
     let reducerResult = selectedType(undefined, {
       type: TYPE_SELECTED,
-      data: "pref"
-    });
-    expect(reducerResult).toEqual(expectedState);
-  });
-
-  it("should test empty string case, and return null state", () => {
-    let expectedState = null;
-    let reducerResult = selectedType(undefined, {
-      type: TYPE_SELECTED,
-      data: ""
+      data: "pref",
     });
     expect(reducerResult).toEqual(expectedState);
   });
