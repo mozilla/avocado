@@ -11,7 +11,7 @@ export class StatusSelector extends React.Component {
   }
 
   onChange(event) {
-    this.props.dispatch(setStatus(event.target.value));
+    this.props.setStatus(event.target.value);
   }
 
   render() {
@@ -26,7 +26,7 @@ export class StatusSelector extends React.Component {
             id="status"
           >
             <option value="">All</option>
-            {Object.keys(STATUSES).map(status => (
+            {Object.keys(STATUSES).map((status) => (
               <option value={status} key={status}>
                 {status}
               </option>
@@ -39,13 +39,16 @@ export class StatusSelector extends React.Component {
 }
 
 StatusSelector.propTypes = {
-  value: PropTypes.string,
   setStatus: PropTypes.func,
-  dispatch: PropTypes.func
+  value: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-  value: state.value
+const mapStateToProps = (state) => ({
+  value: state.value,
 });
 
-export default connect(mapStateToProps)(StatusSelector);
+const mapDispatchToProps = (dispatch) => ({
+  setStatus: (status) => dispatch(setStatus(status)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StatusSelector);
