@@ -11,7 +11,7 @@ export class DatePicker extends React.Component {
   }
 
   onChange(event) {
-    this.props.dispatch(setDate(event.target.value, this.props.onChangeAction));
+    this.props.setDate(event.target.value, this.props.onChangeAction);
   }
 
   render() {
@@ -32,16 +32,19 @@ export class DatePicker extends React.Component {
 }
 
 DatePicker.propTypes = {
-  value: PropTypes.string,
-  setDate: PropTypes.func,
-  dispatch: PropTypes.func,
+  colour: PropTypes.string,
   onChangeAction: PropTypes.string,
+  setDate: PropTypes.func,
   title: PropTypes.string,
-  colour: PropTypes.string
+  value: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-  value: state.value
+const mapStateToProps = (state) => ({
+  value: state.value,
 });
 
-export default connect(mapStateToProps)(DatePicker);
+const mapDispatchToProps = (dispatch) => ({
+  setDate: (value, dateActionType) => dispatch(setDate(value, dateActionType)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DatePicker);

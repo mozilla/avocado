@@ -17,7 +17,7 @@ export class TypeSelector extends React.Component {
         return option.value;
       });
     }
-    this.props.dispatch(setType(types));
+    this.props.setType(types);
   }
 
   render() {
@@ -45,13 +45,16 @@ export class TypeSelector extends React.Component {
 }
 
 TypeSelector.propTypes = {
-  value: PropTypes.string,
   setType: PropTypes.func,
-  dispatch: PropTypes.func,
+  value: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   value: state.value,
 });
 
-export default connect(mapStateToProps)(TypeSelector);
+const mapDispatchToProps = (dispatch) => ({
+  setType: (types) => dispatch(setType(types)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TypeSelector);
