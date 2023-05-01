@@ -57,7 +57,7 @@
     "assets": "^3.0.1",
     "bootstrap": "^4.3.1",
     "immutable": "^4.0.0-rc.12",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "plotly.js": "^1.49.3",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
