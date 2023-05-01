@@ -46,7 +46,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.8.0",
     "jest-fetch-mock": "^2.1.2",
-    "parcel-bundler": "^1.0.1",
+    "parcel-bundler": "^1.12.3",
     "prettier": "^1.17.1",
     "react-test-renderer": "^16.8.6",
     "redux-mock-store": "^1.5.3",
